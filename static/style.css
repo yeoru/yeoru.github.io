@@ -82,7 +82,10 @@ nav div {
 .top-h2 {
     margin-top: 50px;
 }
-
+footer
+footer img{
+    width:50px;
+}
 @media only screen and (min-width:200px) and (max-width:600px) {
     nav a {
         margin-left: 3px;
