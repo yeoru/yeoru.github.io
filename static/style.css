@@ -98,17 +98,19 @@ footer a img{
 }
 
 .card {
+    /*
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+    */
+    display: #ffffff;
     text-align: center;
 }
 
 .card img {
-    width: 100px;
-    height: 100px;
+    width: 400px;
+    height: 400px;
     display: block;
     margin: 0 auto;
 }
