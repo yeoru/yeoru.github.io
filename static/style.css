@@ -93,8 +93,8 @@ footer a img{
 .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-    padding: 20px;
+    grid-gap: 10px;
+    padding: 10px;
 }
 
 .card {
@@ -124,7 +124,7 @@ footer a img{
     margin-top: 10px;
 }
 
-@media only screen and (min-width:200px) and (max-width:600px) {
+@media only screen and (min-width:100px) and (max-width:600px) {
     nav a {
         margin-left: 3px;
         margin-right: 3px;
