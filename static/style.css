@@ -102,10 +102,12 @@ nav div {
 footer{
     text-align: center;
 }
-footer a img{
-    width:20px;
+footer a img {
+    width: 20px;
     height: 20px;
-} 
+    display: block;
+    margin: 0 auto;
+}
 
 .container {
     max-width: 800px; /* 원하는 최대 넓이로 설정 (예: 800px) */
