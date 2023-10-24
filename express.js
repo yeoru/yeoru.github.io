@@ -5,32 +5,25 @@ const port = 3000;
 
 app.use(express.json());
 
+// 클라이언트에서 POST 요청을 받아 파일에 텍스트 추가
 app.post('/addSentence', (req, res) => {
   const sentence = req.body.sentence;
-  if (!sentence) {
-    return res.status(400).send('Sentence is required');
+  if (sentence) {
+    // 파일에 텍스트를 추가
+    fs.appendFile('sentences.txt', sentence + '\n', (err) => {
+      if (err) {
+        console.error('파일에 텍스트를 추가하는 중 오류가 발생했습니다.', err);
+        res.sendStatus(500);
+      } else {
+        console.log('파일에 텍스트가 추가되었습니다.');
+        res.sendStatus(200);
+      }
+    });
+  } else {
+    res.sendStatus(400);
   }
-
-  fs.appendFile('sentences.txt', sentence + '\n', (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error saving the sentence.');
-    }
-    res.status(200).send('Sentence added successfully');
-  });
-});
-
-app.get('/getSentences', (req, res) => {
-  fs.readFile('sentences.txt', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send('Error reading sentences.');
-    }
-    const sentences = data.split('\n').filter(Boolean);
-    res.json(sentences);
-  });
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
 });
