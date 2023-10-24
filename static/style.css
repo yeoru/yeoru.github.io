@@ -6,29 +6,32 @@
 
 h1 {
     text-align: center;
+    font-size: 14px;
     padding: 20px;
-    background-color: #9ef0c3;
+    background-color: rgb(6, 255, 243);
     color: #000000;
     margin: 0;
 }
 
 h2 {
+    font-size: 11px;
     text-align: center;
-    color: #8dc2b0;
+    color: #00d6b3;
     margin: 0;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
-    margin: 20px;
+    margin: 10px;
 }
 
 li {
-    background-color: #fff;
-    border: 1px solid #f5f5f5;
-    margin-bottom: 10px;
-    padding: 7px;
+    font-size: 10px;
+    background-color: #f9fffe;
+    border: 1px solid #f9fffe;
+    margin-bottom: 5px;
+    padding: 5px;
     border-radius: 3px;
     /*   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     text-decoration: none;
@@ -42,8 +45,8 @@ a {
 
 li i {
     font-style: italic;
-    color: #5eb993;
-    font-weight: bold;
+    color: #03eeff;
+    font-weight: none;
 }
 
 nav {
@@ -64,8 +67,8 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #5eb993;
-    color: white;
+    background-color: #000000;
+    color: rgb(6, 255, 243);
 }
 
 nav h4 {
@@ -91,6 +94,8 @@ footer a img{
 } 
 
 .container {
+    max-width: 800px; /* 원하는 최대 넓이로 설정 (예: 800px) */
+    margin: 0 auto; 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
