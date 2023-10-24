@@ -21,14 +21,14 @@ h2 {
 }
 
 h3 {
-    font-size: 11px;
-    text-align: center;
+    font-size: 14px;
+    text-align: left;
     color: #000000;
     margin: 0;
 }
 
 h4 {
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
     color: #000000;
     margin: 0;
@@ -41,7 +41,7 @@ ul {
 }
 
 li {
-    font-size: 10px;
+    font-size: 11px;
     background-color: #f9fffe;
     border: 1px solid #f9fffe;
     margin-bottom: 5px;
