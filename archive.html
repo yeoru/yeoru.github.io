@@ -3,9 +3,33 @@
 <head>
 <style>
 /* CSS 코드 */
+
 body {
-  background-color: rgb(31, 31, 32); 
+  background-color: rgb(31, 31, 32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
+
+#text-input {
+  /* 가운데 정렬 스타일 */
+  width: 300px; /* 원하는 너비 지정 */
+  background-color: rgb(228, 228, 228);
+  stroke: rgb(31, 31, 32);
+  padding: 10px;
+  font-size: 16px;
+}
+
+#add-button {
+  /* 버튼 높이 설정 */
+  height: 40px;
+  background-color: rgb(228, 228, 228);
+  color: rgb(255, 255, 255);
+}
+
+
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -20,15 +44,16 @@ body {
 
 .float-text {
   animation: float 3s infinite; 
-  position: absolute;
+  position: random;
   color: rgb(38, 198, 204); 
 }
 
 </style>
+
 </head>
 <body>
-<input type="text" id="text-input" placeholder="자신이 강력히 원하는 사항을 입력하세요">
-<button onclick="addFloatingText()">추가</button>
+<input type="text" id="text-input"  placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
+<button id="add-button" onclick="addFloatingText()">  추가</button>
 <div id="floating-text-container"></div>
 
 <script>

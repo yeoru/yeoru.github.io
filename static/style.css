@@ -42,8 +42,8 @@ ul {
 
 li {
     font-size: 11px;
-    background-color: #f9fffe;
-    border: 1px solid #f9fffe;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
     margin-bottom: 5px;
     padding: 5px;
     border-radius: 3px;
@@ -59,7 +59,7 @@ a {
 
 li i {
     font-style: italic;
-    color: #00ffaa;
+    color: rgb(38, 198, 204);
     font-weight: none;
 }
 
