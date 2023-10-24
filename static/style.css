@@ -21,12 +21,18 @@ h2 {
 }
 
 h3 {
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
     color: #000000;
     margin: 0;
 }
 
+h4 {
+    font-size: 12px;
+    text-align: left;
+    color: #000000;
+    margin: 0;
+}
 
 ul {
     list-style-type: none;
