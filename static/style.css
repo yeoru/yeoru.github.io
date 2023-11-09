@@ -63,7 +63,7 @@ a {
 
 li i {
     font-style: italic;
-    color: rgb(30, 30, 204)
+    color: rgb(30, 30, 204);
     font-weight: none;
 }
 
@@ -86,7 +86,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #000000;
+   /* background-color: #000000;*/
     color: rgb(6, 255, 243);
 }
 
