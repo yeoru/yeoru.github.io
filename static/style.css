@@ -1,7 +1,10 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&display=swap');
+ 
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&family=Orbit&display=swap'); 
+
 * {
-    font-family: 'Noto Sans KR';
+    font-family: 'Noto Sans KR'; 
+    background:black;
 }
 
 h1 {
@@ -9,7 +12,7 @@ h1 {
     font-size: 14px;
     padding: 20px;
     background-color: rgb(6, 255, 243);
-    color: #000000;
+    color: #fcfcfc;
     margin: 0;
 }
 
@@ -23,14 +26,14 @@ h2 {
 h3 {
     font-size: 14px;
     text-align: left;
-    color: #000000;
+    color: #ffffff;
     margin: 0;
 }
 
 h4 {
     font-size: 14px;
     text-align: left;
-    color: #000000;
+    color: #ffffff;
     margin: 0;
 }
 
@@ -56,12 +59,12 @@ a {
     text-align: center;
     font-size: 13px;
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 li i {
     font-style: italic;
-    color: rgb(38, 198, 204);
+    color: rgb(149, 150, 150);
     font-weight: none;
 }
 
@@ -80,6 +83,7 @@ nav a {
     display: inline-block;
     padding: 5px;
     margin: 10px;
+    color: rgb(199, 199, 199)
 }
 
 nav a:hover {
@@ -154,8 +158,9 @@ footer a img {
     margin-top: 10px;
 }
 
-.eng {
-    font-family: 'Hahmlet', serif;
+.eng { 
+    
+    font-family: 'Orbit', sans-serif;
 }
 
 @media only screen and (min-width:100px) and (max-width:600px) {
