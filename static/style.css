@@ -86,6 +86,10 @@ nav a:hover {
     background-color: #000000;
     color: rgb(6, 255, 243);
 }
+nav a.selected {
+    background-color: #000000;
+    color: rgb(6, 255, 243);
+}
 
 nav h4 {
     position: absolute;
