@@ -55,7 +55,40 @@ body {
 <input type="text" id="text-input"  placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
 <button id="add-button" onclick="addFloatingText()">  추가</button>
 <div id="floating-text-container"></div>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAas6a-M09tPLHu5p5C37RO_BmY_WnOF0I",
+    authDomain: "yyyy-9ed04.firebaseapp.com",
+    projectId: "yyyy-9ed04",
+    storageBucket: "yyyy-9ed04.appspot.com",
+    messagingSenderId: "1017106848865",
+    appId: "1:1017106848865:web:06ec096dabd4c0a427de20",
+    measurementId: "G-J7J2931TC8"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  async function selectData(collectionName) {
+  try {
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    querySnapshot.forEach((doc) => {
+      console.log("Document data:", doc.data());
+    });
+  } catch (error) {
+    console.error("Error selecting documents: ", error);
+  }
+}
+
+</script>
 <script>
 // JavaScript 코드
 function addFloatingText() {
