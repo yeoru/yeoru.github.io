@@ -4,7 +4,7 @@
 
 * {
     font-family: 'Noto Sans KR'; 
-    background:black;
+    background:rgb(24, 24, 90);
 }
 
 h1 {
@@ -45,10 +45,10 @@ ul {
 
 li {
     font-size: 12px;
-    border: 1px solid #ffffff;
     margin-bottom: 5px;
-    padding: 5px;
-    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    /*padding: 5px;
+   /* border-radius: 3px;
     /*   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     text-decoration: none;
     list-style: none;
