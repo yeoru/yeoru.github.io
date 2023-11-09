@@ -1,39 +1,38 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
- 
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&family=Orbit&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&family=Orbit&display=swap');
 
 * {
-    font-family: 'Noto Sans KR'; 
-    background:rgb(24, 24, 90);
+    font-family: 'Noto Sans KR';
+    background: rgb(255, 255, 255);
 }
 
 h1 {
     text-align: center;
     font-size: 14px;
     padding: 20px;
-    background-color: rgb(6, 255, 243);
-    color: #fcfcfc;
+    background-color: rgb(1, 214, 204);
+    color: #000000;
     margin: 0;
 }
 
 h2 {
     font-size: 11px;
     text-align: center;
-    color: #b1b1b1;
+    color: #2b2b2b;
     margin: 0;
 }
 
 h3 {
     font-size: 14px;
     text-align: left;
-    color: #ffffff;
+    color: #2b2b2b;
     margin: 0;
 }
 
 h4 {
     font-size: 14px;
     text-align: left;
-    color: #ffffff;
+    color: #2b2b2b;
     margin: 0;
 }
 
@@ -46,10 +45,10 @@ ul {
 li {
     font-size: 12px;
     margin-bottom: 5px;
-    color: rgb(255, 255, 255);
-    /*padding: 5px;
-   /* border-radius: 3px;
-    /*   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    color: rgb(77, 57, 57);
+    /* padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     text-decoration: none;
     list-style: none;
 }
@@ -58,12 +57,12 @@ a {
     text-align: center;
     font-size: 13px;
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: #2b2b2b;
 }
 
 li i {
     font-style: italic;
-    color: rgb(30, 30, 204);
+    color: rgb(0, 151, 131);
     font-weight: none;
 }
 
@@ -82,16 +81,16 @@ nav a {
     display: inline-block;
     padding: 5px;
     margin: 10px;
-    color: rgb(253, 253, 253)
+    color: rgb(0, 0, 0);
 }
 
 nav a:hover {
-   /* background-color: #000000;*/
-    color: rgb(6, 255, 243);
+    /* background-color: #000000; */
+    color: rgb(0, 151, 131);
 }
 
 nav a.selected {
-    color: rgb(6, 255, 243);
+    color: rgb(0, 151, 131);
 }
 
 nav h4 {
@@ -137,7 +136,7 @@ footer a img {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     */
-    display: #ffffff;
+    display: #000000;
     text-align: center;
 }
 
@@ -157,12 +156,11 @@ footer a img {
     margin-top: 10px;
 }
 
-.eng { 
-    
+.eng {
     font-family: 'Orbit', sans-serif;
 }
 
-@media only screen and (min-width:100px) and (max-width:600px) {
+@media only screen and (min-width: 100px) and (max-width: 600px) {
     nav a {
         margin-left: 3px;
         margin-right: 3px;
