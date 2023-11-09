@@ -113,6 +113,8 @@ footer {
 }
 
 footer a img {
+    display: inline-block; /* 이미지를 인라인 블록 요소로 설정 */
+    margin: 0 10px; /* 이미지 간격을 조절 (원하는 간격으로 수정) */
     width: 20px;
     height: 20px;
     display: block;
