@@ -154,6 +154,14 @@ footer a img {
     margin: 0 auto;
 }
 
+
+.main img {
+    width: 500px;
+    height: 800px;
+    display: block;
+    margin: 0 auto;
+}
+
 .card a {
     display: block;
     text-align: center;
