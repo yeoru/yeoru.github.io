@@ -155,13 +155,6 @@ footer a img {
 }
 
 
-.main img {
-    width: 500px;
-    height: 800px;
-    display: block;
-    margin: 0 auto;
-}
-
 .card a {
     display: block;
     text-align: center;
@@ -184,4 +177,22 @@ footer a img {
     .container {
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+.main {
+    /*
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    */
+    display: #000000;
+    text-align: center;
+}
+
+.main img {
+    width: 500px;
+    height: 800px;
+    display: block;
+    margin: 0 auto;
 }
