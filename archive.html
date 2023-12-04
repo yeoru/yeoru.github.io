@@ -94,18 +94,70 @@ body {
 function addFloatingText() {
   addTextFromInput();
 }
+let init = [
+  "10억 벌어서 집 사기",
+  "크리스마스에 유럽여행가서 기념품 구입하기",
+  "내가 좋아하는 사람과 이루어지기",
+  "시골에 별장에서 작업하면서 평화롭게 지내기",
+  "내가 운영하는 쇼핑몰 글로벌 브랜드로 런칭하기",
+  "A+학점 맞기",
+  "원하는 대학교에 합격하기",
+  "내가 사랑하는 사람 000와 결혼하기",
+  "재료 걱정 하지 않고 마음껏 표현할 수 있는 작업실 갖기",
+  "서울 강남 한강뷰 아파트에 살기",
+  "더욱 좋은 서비스를 제공, 단골이 늘도록 하여 안정적인 수입 구조 만들기",
+  "세계 대회에서 1위하기",
+  "가족들과 지금처럼만 평화롭고 건강하게 살기",
+  "다리 아픈 것 낫기",
+  "안구건조증 치료하여 행복한 삶 살기",
+  "100억 벌고 대출금 갚기",
+  "전세자금 집주인에게 모두 돌려받기",
+  "퍼스트 클래스 비행기 타서 SNS에 인증하기",
+  "London Fashion Week에 참여하여 패션쇼 감상하기",
+  "아트 바젤에 작품 출품하여 솔드아웃하기",
+  "맡은 사업이 구멍나는 곳 없이 완벽하게 마무리되기",
+  "내년 선거에서 이기기",
+  "임용 시험에서 합격하기",
+  "세무사 시험 합격하기",
+  "맡고 있는 사업 모두 안정적으로 운영하기",
+  "유튜브 구독자 100만명 달성하기",
+  "월 천만원 이상 벌어서 음식점 가격 안보고 고르기",
+  "아들 1지망 대학에 붙기",
+  "지난번 봐두었던 구찌 가방 망설이지 않고 구입할 능력 되기",
+  "매달 해외여행 가는 삶 살기",
+  "다이어트 성공하고 바디프로필 찍기"
+];
 
+// Now 'aspirations' is an array containing all the aspirations as individual string elements.
+
+function loadT(){
+  init = JSON.stringify(init)
+  let d = localStorage.getItem("data") || "[]"
+  console.log(d)
+  d = JSON.parse(d)
+  console.log(d)
+  d.forEach(e =>{
+    const floatingText = document.createElement("div");
+    floatingText.className = "float-text";
+    floatingText.innerText = e; 
+    document.getElementById("floating-text-container").appendChild(floatingText); 
+  })
+}
 function addTextFromInput() {
   const textInput = document.getElementById("text-input");
   const text = textInput.value;
   
   if (text) {
+    let d = JSON.parse(localStorage.getItem("data") || "[]") 
+    d.push(text)
+    d = JSON.stringify(d)
+    localStorage.setItem("data", d) 
+
     const floatingText = document.createElement("div");
     floatingText.className = "float-text";
     floatingText.innerText = text;
     
     document.getElementById("floating-text-container").appendChild(floatingText);
-    
     textInput.value = "";
 
     // 클라이언트 측에서 서버로 문장을 전송
@@ -159,6 +211,7 @@ document.getElementById("text-input").addEventListener("keydown", function (even
 
 // 페이지가 로드될 때 저장된 문장을 가져와 화면에 띄우기
 getSentencesAndDisplay();
+loadT()
 </script>
 </body>
 </html>
