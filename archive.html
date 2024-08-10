@@ -7,6 +7,7 @@
 body {
   background-color: rgb(31, 31, 32);
   display: flex;
+  flex-direction: column; /* 요소들이 위아래로 배치되도록 설정 */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -20,25 +21,26 @@ body {
   stroke: rgb(31, 31, 32);
   padding: 10px;
   font-size: 16px;
+  margin-top: 20px; /* 이미지와 간격 추가 */
 }
 
 img {
-            max-width: 30%;
-            height: auto;
-            display: block;
-            width: 30%; /* Adjusted image width */
-            margin: 20px auto;
-            border: 2px solid #333; /* Add a border around the image */
-            border-radius: 8px; /* Rounded corners */
-        }
+  max-width: 30%;
+  height: auto;
+  display: block;
+  width: 30%; /* 이미지 너비 조정 */
+  margin: 20px auto; /* 상하 간격 추가 */
+  border: 2px solid #333; /* 이미지에 테두리 추가 */
+  border-radius: 8px; /* 모서리 둥글게 */
+}
 
 #add-button {
   /* 버튼 높이 설정 */
   height: 40px;
   background-color: rgb(228, 228, 228);
   color: rgb(255, 255, 255);
+  margin-top: 10px; /* 텍스트 입력과 간격 추가 */
 }
-
 
 @keyframes float {
   0% {
