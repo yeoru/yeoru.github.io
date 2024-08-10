@@ -3,7 +3,8 @@ yeoru.github.io
 yeoru.github.io
 
 git pull origin main
-
+git pull 
+?
 
 git add .
 git commit -m "a"
