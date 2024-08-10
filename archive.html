@@ -22,6 +22,16 @@ body {
   font-size: 16px;
 }
 
+img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            width: 80%; /* Adjusted image width */
+            margin: 20px auto;
+            border: 2px solid #333; /* Add a border around the image */
+            border-radius: 8px; /* Rounded corners */
+        }
+
 #add-button {
   /* 버튼 높이 설정 */
   height: 40px;
@@ -52,6 +62,9 @@ body {
 
 </head>
 <body>
+<p>WISH TOWER</p>
+<img src="https://yeoru.github.io/static/wishtower.png" alt="wishtower">
+
 <input type="text" id="text-input"  placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
 <button id="add-button" onclick="addFloatingText()">  추가</button>
 <div id="floating-text-container"></div>

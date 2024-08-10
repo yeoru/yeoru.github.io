@@ -2,6 +2,9 @@
 yeoru.github.io
 yeoru.github.io
 
+git pull origin main
+
+
 git add .
 git commit -m "a"
 git push origin main
