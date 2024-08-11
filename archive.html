@@ -41,7 +41,7 @@ img {
 
 .float-text {
   animation: float 3s infinite;
-  position: random;
+  position: relative;
   color: rgb(38, 198, 204);
 }
 </style>
@@ -59,7 +59,7 @@ img {
 <script type="module">
 // Firebase SDK 모듈 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 
 // Firebase 구성 정보
 const firebaseConfig = {
@@ -77,6 +77,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+// 저장된 텍스트 데이터를 가져와 화면에 표시하는 함수
+function displaySavedTexts() {
+  const messagesRef = ref(database, 'messages');
+  onValue(messagesRef, (snapshot) => {
+    const floatingTextContainer = document.getElementById("floating-text-container");
+    floatingTextContainer.innerHTML = ""; // 기존 내용 초기화
+    snapshot.forEach((childSnapshot) => {
+      const text = childSnapshot.val();
+      const newTextElement = document.createElement("div");
+      newTextElement.className = "float-text";
+      newTextElement.innerText = text;
+      floatingTextContainer.appendChild(newTextElement);
+    });
+  });
+}
+
 // 서버로 텍스트 데이터를 전송하고 화면에 표시하는 함수
 function addFloatingText() {
   const textInput = document.getElementById("text-input");
@@ -86,13 +102,6 @@ function addFloatingText() {
     // Firebase Realtime Database에 데이터 저장
     const messagesRef = ref(database, 'messages');
     push(messagesRef, text).then(() => {
-      // 입력된 텍스트를 화면에 표시
-      const floatingTextContainer = document.getElementById("floating-text-container");
-      const newTextElement = document.createElement("div");
-      newTextElement.className = "float-text";
-      newTextElement.innerText = text;
-      floatingTextContainer.appendChild(newTextElement);
-
       // 입력 필드 초기화
       textInput.value = "";
     }).catch(error => {
@@ -105,6 +114,9 @@ function addFloatingText() {
 
 // 이벤트 리스너를 통해 버튼 클릭 시 함수 호출
 document.getElementById("add-button").addEventListener("click", addFloatingText);
+
+// 페이지가 로드될 때 저장된 텍스트를 불러와 표시
+displaySavedTexts();
 </script>
 </body>
 </html>
