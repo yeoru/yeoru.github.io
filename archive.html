@@ -7,7 +7,7 @@
 body {
   background-color: rgb(31, 31, 32);
   display: flex;
-  flex-direction: column; /* 요소들이 위아래로 배치되도록 설정 */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -15,73 +15,54 @@ body {
 }
 
 #text-input {
-  /* 가운데 정렬 스타일 */
-  width: 300px; /* 원하는 너비 지정 */
+  width: 300px;
   background-color: rgb(228, 228, 228);
   stroke: rgb(31, 31, 32);
   padding: 10px;
   font-size: 16px;
-  margin-top: 20px; /* 이미지와 간격 추가 */
+  margin-top: 20px;
 }
 
 img {
-  max-width: 30%;
+  max-width: 20%;
   height: auto;
   display: block;
-  width: 30%; /* 이미지 너비 조정 */
-  margin: 20px auto; /* 상하 간격 추가 */
-  border: 2px solid #333; /* 이미지에 테두리 추가 */
-  border-radius: 8px; /* 모서리 둥글게 */
+  width: 20%;
+  margin: 20px auto;
+  border: 1px solid #333;
+  border-radius: 5px;
 }
 
 #add-button {
-  /* 버튼 높이 설정 */
   height: 40px;
   background-color: rgb(228, 228, 228);
   color: rgb(255, 255, 255);
-  margin-top: 10px; /* 텍스트 입력과 간격 추가 */
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  margin-top: 10px;
 }
 
 .float-text {
-  animation: float 3s infinite; 
+  animation: float 3s infinite;
   position: random;
-  color: rgb(38, 198, 204); 
+  color: rgb(38, 198, 204);
 }
 
 </style>
-
 </head>
 <body>
 <h4>WISH TOWER</h4>
 <br>
 <img src="https://yeoru.github.io/static/wishtower.png" alt="wishtower">
 
-<input type="text" id="text-input"  placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
-<button display: flex;id="add-button" onclick="addFloatingText()">  입력</button>
-<br>
-<br>
+<input type="text" id="text-input" placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
+<button id="add-button" onclick="addFloatingText()">입력</button>
+<br><br>
 <div id="floating-text-container"></div>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<script type="module">
+  // Firebase SDK 초기화
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
   const firebaseConfig = {
     apiKey: "AIzaSyAas6a-M09tPLHu5p5C37RO_BmY_WnOF0I",
     authDomain: "yyyy-9ed04.firebaseapp.com",
@@ -89,147 +70,52 @@ img {
     storageBucket: "yyyy-9ed04.appspot.com",
     messagingSenderId: "1017106848865",
     appId: "1:1017106848865:web:06ec096dabd4c0a427de20",
-    measurementId: "G-J7J2931TC8"
+    measurementId: "G-J7J2931TC8",
+    databaseURL: "https://yyyy-9ed04-default-rtdb.firebaseio.com/" // Realtime Database URL 추가
   };
 
-  // Initialize Firebase
+  // Firebase 초기화
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  async function selectData(collectionName) {
-  try {
-    const querySnapshot = await getDocs(collection(db, collectionName));
-    querySnapshot.forEach((doc) => {
-      console.log("Document data:", doc.data());
-    });
-  } catch (error) {
-    console.error("Error selecting documents: ", error);
-  }
-}
+  const database = getDatabase(app);
 
-</script>
-<script>
-// JavaScript 코드
-function addFloatingText() {
-  addTextFromInput();
-}
-let init = [
-  "10억 벌어서 집 사기",
-  "크리스마스에 유럽여행가서 기념품 구입하기",
-  "내가 좋아하는 사람과 이루어지기",
-  "시골에 별장에서 작업하면서 평화롭게 지내기",
-  "내가 운영하는 쇼핑몰 글로벌 브랜드로 런칭하기",
-  "A+학점 맞기",
-  "원하는 대학교에 합격하기",
-  "내가 사랑하는 사람 000와 결혼하기",
-  "재료 걱정 하지 않고 마음껏 표현할 수 있는 작업실 갖기",
-  "서울 강남 한강뷰 아파트에 살기",
-  "더욱 좋은 서비스를 제공, 단골이 늘도록 하여 안정적인 수입 구조 만들기",
-  "세계 대회에서 1위하기",
-  "가족들과 지금처럼만 평화롭고 건강하게 살기",
-  "다리 아픈 것 낫기",
-  "안구건조증 치료하여 행복한 삶 살기",
-  "100억 벌고 대출금 갚기",
-  "전세자금 집주인에게 모두 돌려받기",
-  "퍼스트 클래스 비행기 타서 SNS에 인증하기",
-  "London Fashion Week에 참여하여 패션쇼 감상하기",
-  "아트 바젤에 작품 출품하여 솔드아웃하기",
-  "맡은 사업이 구멍나는 곳 없이 완벽하게 마무리되기",
-  "내년 선거에서 이기기",
-  "임용 시험에서 합격하기",
-  "세무사 시험 합격하기",
-  "맡고 있는 사업 모두 안정적으로 운영하기",
-  "유튜브 구독자 100만명 달성하기",
-  "월 천만원 이상 벌어서 음식점 가격 안보고 고르기",
-  "아들 1지망 대학에 붙기",
-  "지난번 봐두었던 구찌 가방 망설이지 않고 구입할 능력 되기",
-  "매달 해외여행 가는 삶 살기",
-  "다이어트 성공하고 바디프로필 찍기"
-];
+  // 데이터베이스에 데이터 추가
+  function addFloatingText() {
+    const textInput = document.getElementById("text-input");
+    const text = textInput.value;
 
-// Now 'aspirations' is an array containing all the aspirations as individual string elements.
-
-function loadT(){
-  init = JSON.stringify(init)
-  let d = localStorage.getItem("data") || "[]"
-  console.log(d)
-  d = JSON.parse(d)
-  console.log(d)
-  d.forEach(e =>{
-    const floatingText = document.createElement("div");
-    floatingText.className = "float-text";
-    floatingText.innerText = e; 
-    document.getElementById("floating-text-container").appendChild(floatingText); 
-  })
-}
-function addTextFromInput() {
-  const textInput = document.getElementById("text-input");
-  const text = textInput.value;
-  
-  if (text) {
-    let d = JSON.parse(localStorage.getItem("data") || "[]") 
-    d.push(text)
-    d = JSON.stringify(d)
-    localStorage.setItem("data", d) 
-
-    const floatingText = document.createElement("div");
-    floatingText.className = "float-text";
-    floatingText.innerText = text;
-    
-    document.getElementById("floating-text-container").appendChild(floatingText);
-    textInput.value = "";
-
-    // 클라이언트 측에서 서버로 문장을 전송
-    sendDataToServer(text);
-  }
-}
-
-function sendDataToServer(text) {
-  fetch('/addSentence', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ sentence: text }),
-  })
-  .then(response => {
-    if (response.status === 200) {
-      console.log('문장이 서버에 저장되었습니다.');
-    } else {
-      console.error('서버에 문장 저장 중 오류가 발생했습니다.');
+    if (text) {
+      const messagesRef = ref(database, 'messages');
+      push(messagesRef, text);
+      textInput.value = "";
     }
-  })
-  .catch(error => {
-    console.error('서버 통신 중 오류가 발생했습니다.', error);
-  });
-}
-
-function getSentencesAndDisplay() {
-  fetch('/getSentences')
-  .then(response => response.json())
-  .then(sentences => {
-    const container = document.getElementById("floating-text-container");
-    sentences.forEach(sentence => {
-      const floatingText = document.createElement("div");
-      floatingText.className = "float-text";
-      floatingText.innerText = sentence;
-      container.appendChild(floatingText);
-    });
-  })
-  .catch(error => {
-    console.error('서버에서 문장을 가져오는 중 오류가 발생했습니다.', error);
-  });
-}
-
-// Enter 키를 눌렀을 때 처리
-document.getElementById("text-input").addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    addTextFromInput();
   }
-});
 
-// 페이지가 로드될 때 저장된 문장을 가져와 화면에 띄우기
-getSentencesAndDisplay();
-loadT()
+  // Realtime Database에서 데이터 가져오기
+  function loadFloatingText() {
+    const messagesRef = ref(database, 'messages');
+    onValue(messagesRef, (snapshot) => {
+      const container = document.getElementById("floating-text-container");
+      container.innerHTML = ""; // 기존 내용 초기화
+      snapshot.forEach((childSnapshot) => {
+        const message = childSnapshot.val();
+        const floatingText = document.createElement("div");
+        floatingText.className = "float-text";
+        floatingText.innerText = message;
+        container.appendChild(floatingText);
+      });
+    });
+  }
+
+  // 페이지가 로드될 때 Firebase에서 데이터를 불러오기
+  loadFloatingText();
+
+  // Enter 키를 눌렀을 때 처리
+  document.getElementById("text-input").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      addFloatingText();
+    }
+  });
+
 </script>
 </body>
 </html>
