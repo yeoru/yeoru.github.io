@@ -14,6 +14,10 @@ body {
   overflow: hidden; /* 화면 밖으로 나가는 텍스트를 숨깁니다 */
 }
 
+h4 {
+  color: white; /* WISH TOWER를 하얀색으로 변경 */
+}
+
 #text-input {
   width: 300px;
   background-color: rgb(228, 228, 228);
@@ -21,6 +25,17 @@ body {
   padding: 10px;
   font-size: 16px;
   margin-top: 20px;
+  position: relative;
+  z-index: 1000; /* 글자 입력칸을 맨 위로 설정 */
+}
+
+#add-button {
+  height: 40px;
+  background-color: rgb(228, 228, 228);
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
+  position: relative;
+  z-index: 1000; /* 버튼을 맨 위로 설정 */
 }
 
 img {
@@ -31,13 +46,6 @@ img {
   margin: 20px auto;
   border: 1px solid #333;
   border-radius: 5px;
-}
-
-#add-button {
-  height: 40px;
-  background-color: rgb(228, 228, 228);
-  color: rgb(255, 255, 255);
-  margin-top: 10px;
 }
 
 .float-text {
