@@ -3,6 +3,15 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
+var admin = require("firebase-admin");
+
+var serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+
 app.use(express.json());
 
 // 클라이언트에서 POST 요청을 받아 파일에 텍스트 추가

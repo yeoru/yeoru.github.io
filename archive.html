@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <style>
 /* CSS 코드 */
 
@@ -59,62 +60,23 @@ img {
 <div id="floating-text-container"></div>
 
 <script type="module">
-  // Firebase SDK 초기화
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+// 클라이언트 측 Firebase 초기화 예제
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAas6a-M09tPLHu5p5C37RO_BmY_WnOF0I",
-    authDomain: "yyyy-9ed04.firebaseapp.com",
-    projectId: "yyyy-9ed04",
-    storageBucket: "yyyy-9ed04.appspot.com",
-    messagingSenderId: "1017106848865",
-    appId: "1:1017106848865:web:06ec096dabd4c0a427de20",
-    measurementId: "G-J7J2931TC8",
-    databaseURL: "https://yyyy-9ed04-default-rtdb.firebaseio.com/" // Realtime Database URL 추가
-  };
+const firebaseConfig = {
+    apiKey: "your-api-key",
+    authDomain: "your-project-id.firebaseapp.com",
+    databaseURL: "https://your-project-id.firebaseio.com",
+    projectId: "your-project-id",
+    storageBucket: "your-project-id.appspot.com",
+    messagingSenderId: "your-messaging-sender-id",
+    appId: "your-app-id"
+};
 
-  // Firebase 초기화
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-
-  // 데이터베이스에 데이터 추가
-  function addFloatingText() {
-    const textInput = document.getElementById("text-input");
-    const text = textInput.value;
-
-    if (text) {
-      const messagesRef = ref(database, 'messages');
-      push(messagesRef, text);
-      textInput.value = "";
-    }
-  }
-
-  // Realtime Database에서 데이터 가져오기
-  function loadFloatingText() {
-    const messagesRef = ref(database, 'messages');
-    onValue(messagesRef, (snapshot) => {
-      const container = document.getElementById("floating-text-container");
-      container.innerHTML = ""; // 기존 내용 초기화
-      snapshot.forEach((childSnapshot) => {
-        const message = childSnapshot.val();
-        const floatingText = document.createElement("div");
-        floatingText.className = "float-text";
-        floatingText.innerText = message;
-        container.appendChild(floatingText);
-      });
-    });
-  }
-
-  // 페이지가 로드될 때 Firebase에서 데이터를 불러오기
-  loadFloatingText();
-
-  // Enter 키를 눌렀을 때 처리
-  document.getElementById("text-input").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      addFloatingText();
-    }
-  });
+// Firebase 초기화
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 </script>
 </body>
