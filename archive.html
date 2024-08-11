@@ -75,7 +75,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// 서버로 텍스트 데이터를 전송하는 함수
+// 서버로 텍스트 데이터를 전송하고 화면에 표시하는 함수
 function addFloatingText() {
   const textInput = document.getElementById("text-input");
   const text = textInput.value;
@@ -84,7 +84,16 @@ function addFloatingText() {
     // Firebase Realtime Database에 데이터 저장
     const messagesRef = ref(database, 'messages');
     push(messagesRef, text);
-    textInput.value = ""; // 입력 필드 초기화
+
+    // 입력된 텍스트를 화면에 표시
+    const floatingTextContainer = document.getElementById("floating-text-container");
+    const newTextElement = document.createElement("div");
+    newTextElement.className = "float-text";
+    newTextElement.innerText = text;
+    floatingTextContainer.appendChild(newTextElement);
+
+    // 입력 필드 초기화
+    textInput.value = "";
   }
 }
 </script>
