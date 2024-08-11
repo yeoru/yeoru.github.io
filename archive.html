@@ -11,6 +11,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden; /* 화면 밖으로 나가는 텍스트를 숨깁니다 */
 }
 
 #text-input {
@@ -40,9 +41,21 @@ img {
 }
 
 .float-text {
-  animation: float 3s infinite;
-  position: relative;
+  position: absolute;
   color: rgb(38, 198, 204);
+  animation: float 3s infinite; /* 기본 애니메이션 */
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
@@ -77,6 +90,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+// 랜덤한 위치와 애니메이션 속도를 설정하는 함수
+function setRandomPositionAndAnimation(element) {
+  // 화면 크기를 고려하여 랜덤 위치 설정
+  const randomX = Math.random() * (window.innerWidth - element.offsetWidth);
+  const randomY = Math.random() * (window.innerHeight - element.offsetHeight);
+
+  // 요소의 초기 위치 설정
+  element.style.left = `${randomX}px`;
+  element.style.top = `${randomY}px`;
+
+  // 랜덤한 애니메이션 속도 설정
+  const randomDuration = Math.random() * 3 + 2; // 2초에서 5초 사이의 랜덤 시간
+  element.style.animationDuration = `${randomDuration}s`;
+}
+
 // 저장된 텍스트 데이터를 가져와 화면에 표시하는 함수
 function displaySavedTexts() {
   const messagesRef = ref(database, 'messages');
@@ -89,6 +117,9 @@ function displaySavedTexts() {
       newTextElement.className = "float-text";
       newTextElement.innerText = text;
       floatingTextContainer.appendChild(newTextElement);
+
+      // 랜덤한 위치와 애니메이션 속도 설정
+      setRandomPositionAndAnimation(newTextElement);
     });
   });
 }
