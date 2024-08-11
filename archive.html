@@ -52,11 +52,11 @@ img {
 <img src="https://yeoru.github.io/static/wishtower.png" alt="wishtower">
 
 <input type="text" id="text-input" placeholder="당신이 현재 강력히 원하는 것은 무엇인가요?">
-<button id="add-button" onclick="addFloatingText()">입력</button>
+<button id="add-button">입력</button>
 <br><br>
 <div id="floating-text-container"></div>
 
-<script>
+<script type="module">
 // 클라이언트 측 Firebase 초기화 예제
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
@@ -96,6 +96,9 @@ function addFloatingText() {
     textInput.value = "";
   }
 }
+
+// 이벤트 리스너를 통해 버튼 클릭 시 함수 호출
+document.getElementById("add-button").addEventListener("click", addFloatingText);
 </script>
 </body>
 </html>
