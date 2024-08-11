@@ -16,6 +16,8 @@ body {
 
 h4 {
   color: white; /* WISH TOWER를 하얀색으로 변경 */
+  position: relative;
+  z-index: 1001; /* 텍스트 위에 오도록 설정 */
 }
 
 #text-input {
@@ -26,7 +28,7 @@ h4 {
   font-size: 16px;
   margin-top: 20px;
   position: relative;
-  z-index: 1000; /* 글자 입력칸을 맨 위로 설정 */
+  z-index: 1001; /* 텍스트 위에 오도록 설정 */
 }
 
 #add-button {
@@ -35,7 +37,7 @@ h4 {
   color: rgb(255, 255, 255);
   margin-top: 10px;
   position: relative;
-  z-index: 1000; /* 버튼을 맨 위로 설정 */
+  z-index: 1001; /* 텍스트 위에 오도록 설정 */
 }
 
 img {
@@ -46,12 +48,15 @@ img {
   margin: 20px auto;
   border: 1px solid #333;
   border-radius: 5px;
+  position: relative;
+  z-index: 1001; /* 텍스트 위에 오도록 설정 */
 }
 
 .float-text {
   position: absolute;
   color: rgb(38, 198, 204);
   animation: float 3s infinite; /* 기본 애니메이션 */
+  z-index: 1; /* 모든 텍스트를 맨 뒤로 설정 */
 }
 
 @keyframes float {
