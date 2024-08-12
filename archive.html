@@ -11,13 +11,13 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden; /* 화면 밖으로 나가는 텍스트를 숨깁니다 */
+  overflow: hidden;
 }
 
 h4 {
-  color: white; /* WISH TOWER를 하얀색으로 변경 */
+  color: white;
   position: relative;
-  z-index: 1001; /* 텍스트 위에 오도록 설정 */
+  z-index: 1001;
 }
 
 #text-input {
@@ -28,7 +28,7 @@ h4 {
   font-size: 16px;
   margin-top: 20px;
   position: relative;
-  z-index: 1001; /* 텍스트 위에 오도록 설정 */
+  z-index: 1001;
 }
 
 #add-button {
@@ -37,7 +37,7 @@ h4 {
   color: rgb(255, 255, 255);
   margin-top: 10px;
   position: relative;
-  z-index: 1001; /* 텍스트 위에 오도록 설정 */
+  z-index: 1001;
 }
 
 img {
@@ -49,25 +49,22 @@ img {
   border: 1px solid #333;
   border-radius: 5px;
   position: relative;
-  z-index: 1001; /* 텍스트 위에 오도록 설정 */
+  z-index: 1001;
 }
 
 .float-text {
   position: absolute;
   color: rgb(38, 198, 204);
-  animation: float 3s infinite; /* 기본 애니메이션 */
-  z-index: 1; /* 모든 텍스트를 맨 뒤로 설정 */
+  animation: moveRandomly 10s infinite alternate;
+  z-index: 1;
 }
 
-@keyframes float {
+@keyframes moveRandomly {
   0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
+    transform: translate(0, 0);
   }
   100% {
-    transform: translateY(0);
+    transform: translate(var(--move-x), var(--move-y));
   }
 }
 </style>
@@ -103,19 +100,40 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+// 키워드와 색상 매핑 설정
+const keywordColors = {
+  "부동산": "rgb(207, 199, 71)", // 노란색
+  "집": "rgb(207, 199, 71)", // 노란색
+  "인정": "rgb(231, 105, 132)", // 빨간색
+  "승진": "rgb(231, 105, 132)" , // 빨간색
+  "워라벨": "rgb(231, 105, 132)"  // 빨간색
+};
+
 // 랜덤한 위치와 애니메이션 속도를 설정하는 함수
 function setRandomPositionAndAnimation(element) {
-  // 화면 크기를 고려하여 랜덤 위치 설정
   const randomX = Math.random() * (window.innerWidth - element.offsetWidth);
   const randomY = Math.random() * (window.innerHeight - element.offsetHeight);
 
-  // 요소의 초기 위치 설정
   element.style.left = `${randomX}px`;
   element.style.top = `${randomY}px`;
 
-  // 랜덤한 애니메이션 속도 설정
-  const randomDuration = Math.random() * 3 + 2; // 2초에서 5초 사이의 랜덤 시간
+  const moveX = Math.random() * 100 - 50;
+  const moveY = Math.random() * 100 - 50;
+  element.style.setProperty('--move-x', `${moveX}px`);
+  element.style.setProperty('--move-y', `${moveY}px`);
+
+  const randomDuration = Math.random() * 5 + 5;
   element.style.animationDuration = `${randomDuration}s`;
+}
+
+// 텍스트에 따라 색상을 결정하는 함수
+function determineColor(text) {
+  for (const keyword in keywordColors) {
+    if (text.includes(keyword)) {
+      return keywordColors[keyword];
+    }
+  }
+  return "rgb(38, 198, 204)"; // 기본 색상
 }
 
 // 저장된 텍스트 데이터를 가져와 화면에 표시하는 함수
@@ -123,15 +141,15 @@ function displaySavedTexts() {
   const messagesRef = ref(database, 'messages');
   onValue(messagesRef, (snapshot) => {
     const floatingTextContainer = document.getElementById("floating-text-container");
-    floatingTextContainer.innerHTML = ""; // 기존 내용 초기화
+    floatingTextContainer.innerHTML = "";
     snapshot.forEach((childSnapshot) => {
       const text = childSnapshot.val();
       const newTextElement = document.createElement("div");
       newTextElement.className = "float-text";
       newTextElement.innerText = text;
+      newTextElement.style.color = determineColor(text); // 텍스트 색상 설정
       floatingTextContainer.appendChild(newTextElement);
 
-      // 랜덤한 위치와 애니메이션 속도 설정
       setRandomPositionAndAnimation(newTextElement);
     });
   });
@@ -143,10 +161,8 @@ function addFloatingText() {
   const text = textInput.value;
 
   if (text) {
-    // Firebase Realtime Database에 데이터 저장
     const messagesRef = ref(database, 'messages');
     push(messagesRef, text).then(() => {
-      // 입력 필드 초기화
       textInput.value = "";
     }).catch(error => {
       console.error("저장 중 오류 발생:", error);
@@ -156,10 +172,8 @@ function addFloatingText() {
   }
 }
 
-// 이벤트 리스너를 통해 버튼 클릭 시 함수 호출
 document.getElementById("add-button").addEventListener("click", addFloatingText);
 
-// 페이지가 로드될 때 저장된 텍스트를 불러와 표시
 displaySavedTexts();
 </script>
 </body>
