@@ -55,13 +55,22 @@ img {
 .float-text {
   position: absolute;
   color: rgb(38, 198, 204);
-  animation: moveRandomly 10s infinite alternate;
+  animation: moveAndShake 10s infinite alternate;
   z-index: 1;
 }
 
-@keyframes moveRandomly {
+@keyframes moveAndShake {
   0% {
     transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(var(--move-x), var(--move-y)) translateY(-2px);
+  }
+  50% {
+    transform: translate(var(--move-x), var(--move-y)) translateY(2px);
+  }
+  75% {
+    transform: translate(var(--move-x), var(--move-y)) translateY(-2px);
   }
   100% {
     transform: translate(var(--move-x), var(--move-y));
@@ -116,6 +125,14 @@ const keywordColors = {
   "구찌": "rgb(242, 165, 119)", // 주황색 소유
   "컬렉팅": "rgb(242, 165, 119)", // 주황색 소유
   "소유": "rgb(242, 165, 119)", // 주황색 소유
+  "사랑": "rgb(239, 175, 216)", // 핑크색 애정
+  "연인": "rgb(239, 175, 216)", // 핑크색 애정
+  "애인": "rgb(239, 175, 216)", // 핑크색 애정
+  "유혹": "rgb(239, 175, 216)", // 핑크색 애정
+  "매력": "rgb(239, 175, 216)", // 핑크색 애정
+  "여자친구": "rgb(239, 175, 216)", // 핑크색 애정
+  "남자친구": "rgb(239, 175, 216)", // 핑크색 애정
+  "마음": "rgb(239, 175, 216)", // 핑크색 애정
   "부동산": "rgb(244, 211, 173)", // 노란색 영역
   "반포": "rgb(244, 211, 173)", // 노란색 영역
   "자이": "rgb(244, 211, 173)", // 노란색 영역
