@@ -1,6 +1,7 @@
 #
 yeoru.github.io
-yeoru.github.io
+git config --global user.name "Yang Yeong"
+git config --global user.email "yyj4561@naver.com"
 
 git pull origin main
 git pull 
