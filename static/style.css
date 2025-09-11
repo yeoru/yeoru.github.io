@@ -1,198 +1,65 @@
-@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
-@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&family=Orbit&display=swap');
-
-* {
-    font-family: 'Noto Sans KR';
-    background: rgb(255, 255, 255);
+/* ====== 공통 메뉴 디자인 ====== */
+.site-nav {
+  position: sticky;        /* 스크롤해도 위에 붙어있음 */
+  top: 0;
+  z-index: 100;
+  background: #fff;        /* 흰 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee; /* 얇은 경계선 */
 }
 
-h1 {
-    text-align: center;
-    font-size: 14px;
-    padding: 20px;
-    background-color: rgb(1, 214, 204);
-    color: #000000;
-    margin: 0;
+/* 왼쪽 로고/이름 */
+.site-nav h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.site-nav h4 a {
+  text-decoration: none;
+  color: #111;
 }
 
-h2 {
-    font-size: 12px;
-    text-align: center;
-    color: #2b2b2b;
-    margin: 0;
+/* 오른쪽 메뉴 그룹 */
+.site-nav > div {
+  display: flex;
+  align-items: center;
+  gap: 18px;               /* 메뉴 간격 */
+}
+.site-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  line-height: 1;
+  padding: 6px 2px;        /* 클릭 영역 확대 */
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s ease, color .2s ease;
 }
 
-h3 {
-    font-size: 10px;
-    text-align: left;
-    color: #2b2b2b;
-    margin: 0;
+/* 마우스 올렸을 때 */
+.site-nav a:hover {
+  color: #000;
+  border-bottom-color: #000;  /* 밑줄 강조 */
 }
 
-h4 {
-    font-size: 10px;
-    text-align: left;
-    color: #ffffff;
-    margin: 0;
+/* 현재 선택된 메뉴 */
+.site-nav a.selected {
+  font-weight: 600;
+  border-bottom-color: #000;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px;
-}
-
-li {
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: rgb(0, 0, 0);
-    /* padding: 5px;
-    border-radius: 3px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    text-decoration: none;
-    list-style: none;
-}
-
-a {
-    text-align: center;
+/* 모바일 화면일 때 */
+@media (max-width: 560px) {
+  .site-nav {
+    padding: 10px 14px;
+  }
+  .site-nav > div {
+    gap: 12px;
+  }
+  .site-nav a {
     font-size: 13px;
-    text-decoration: none;
-    color: #2b2b2b;
-}
-
-li i {
-    font-style: italic;
-    color: rgb(0, 151, 131);
-    font-weight: none;
-}
-
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 50px;
-    backdrop-filter: blur(2px);
-}
-
-nav a {
-    background: none;
-    transition: all .3s ease;
-    border-radius: 5px;
-    display: inline-block;
-    padding: 5px;
-    margin: 10px;
-    color: rgb(0, 0, 0);
-}
-
-nav a:hover {
-    /* background-color: #000000; */
-    color: rgb(0, 151, 131);
-}
-
-nav a.selected {
-    color: rgb(0, 151, 131);
-}
-
-nav h4 {
-    position: absolute;
-    left: 0;
-    bottom: 15px;
-}
-
-nav div {
-    position: absolute;
-    right: 0;
-}
-
-.top-h2 {
-    margin-top: 50px;
-}
-
-footer {
-    text-align: center;
-}
-
-footer a {
-    display: inline-block; /* 인라인 블록 요소로 설정 */
-    margin: 0 10px;
-}
-
-footer a img {
-    display: inline-block; /* 이미지를 인라인 블록 요소로 설정 */
-    margin: 0 10px; /* 이미지 간격을 조절 (원하는 간격으로 수정) */
-    width: 20px;
-    height: 20px;
-    display: block;
-    margin: 0 auto;
-}
-
-.container {
-    max-width: 800px;
-    /* 원하는 최대 넓이로 설정 (예: 800px) */
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    padding: 10px;
-}
-
-.card {
-    /*
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    */
-    display: #000000;
-    text-align: center;
-}
-
-.card img {
-    width: 400px;
-    height: 400px;
-    display: block;
-    margin: 0 auto;
-}
-
-
-.card a {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.eng {
-    font-family: 'Orbit', sans-serif;
-}
-
-@media only screen and (min-width: 100px) and (max-width: 600px) {
-    nav a {
-        margin-left: 3px;
-        margin-right: 3px;
-    }
-
-    .container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-.main {
-    /*
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    */
-    display: #000000;
-    text-align: center;
-}
-
-.main img {
-    width: 500px;
-    height: 800px;
-    display: block;
-    margin: 0 auto;
+  }
 }

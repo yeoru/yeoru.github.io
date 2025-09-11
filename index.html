@@ -1,66 +1,127 @@
 <!DOCTYPE html>
 <html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YangYeong.J</title>
+  <link rel="stylesheet" href="../static/style.css">
 
-<style>
-    img {
-        max-width: 110%;
-        height: auto;
-        display: block;
-        width: 90%; /* Adjusted image width */
-        margin: 20px auto;
+  <style>
+    /* 페이지 개별 스타일만 유지 */
+
+    /* 작품 이미지(카드 이미지) */
+    .card img {
+      max-width: 110%;
+      height: auto;
+      display: block;
+      width: 90%;
+      margin: 20px auto;
     }
 
     .highlighted-text {
-        font-size: 15px; /* Adjusted font size */
-        color: #555555; /* Adjusted text color */
-        padding: 0 20px; /* Added padding on the left and right sides */
+      font-size: 15px;
+      color: #555555;
+      padding: 0 20px;
     }
-</style>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YangYeong.J</title>
-    <!-- <link rel="stylesheet" href="https://yeoru.github.io/static/style.css">  -->
-    <link rel="stylesheet" href="../static/style.css">
+    /* footer 아이콘은 작게 고정 (전역 img의 영향 차단) */
+    footer img {
+      width: 18px !important;
+      height: 18px !important;
+      max-width: none !important;
+      margin: 0 6px;
+      display: inline-block;
+    }
+  </style>
 </head>
 
 <body>
-    <nav>
-        <h4><a href="https://yeoru.github.io/index.html">YangYeong.J</a></h4>
-        <div>
-            <a href="https://yeoru.github.io/cv.html" rel="noopener noreferrer">CV</a>
-            <a href="https://yeoru.github.io/portfolio_yet.html" rel="noopener noreferrer">PORTFOLIO</a>
-            <a href="https://yeoru.github.io/archive.html" target="_blank" rel="noopener noreferrer">ARCHIVE</a>
-            <a href="https://quasar-spatula-6e6.notion.site/CHAOSMOS-WORK_LY-NOTE-02afb47158824e898ce5d19620dcc407?pvs=4" target="_blank" rel="noopener noreferrer">BLOG</a>
-            <a href="https://yeoru.github.io/contact.html" rel="noopener noreferrer">CONTACT</a>
-        </div>
-    </nav>
-
-    <br><br>
-    <div class="card">
-        <a href="main" style="text-align:center" src="https://yeoru.github.io/static/title_img.gif" alt="home"> </a>
+  <!-- 메뉴는 공통 CSS에서 관리 -->
+  <nav class="site-nav">
+    <h4><a href="https://yeoru.github.io/index.html">YangYeong.J</a></h4>
+    <div>
+      <a href="https://yeoru.github.io/cv.html" rel="noopener noreferrer">CV</a>
+      <a href="https://yeoru.github.io/portfolio_manu.html" rel="noopener noreferrer">PORTFOLIO</a>
+      <a href="https://yeoru.github.io/archive.html" target="_blank" rel="noopener noreferrer">ARCHIVE</a>
+      <a href="https://quasar-spatula-6e6.notion.site/CHAOSMOS-WORK_LY-NOTE-02afb47158824e898ce5d19620dcc407?pvs=4" target="_blank" rel="noopener noreferrer">BLOG</a>
+      <a href="https://yeoru.github.io/contact.html" rel="noopener noreferrer" class="selected">CONTACT</a>
     </div>
-    <br><br>
-    <h2 class="highlighted-text" style="text-align:left">Hello chaosmos.<br>
-       Yang Yeong ju is a painter and media artist who explores the energetic transactions between humans, technology, and the environment.</h2>
-    <br><br><br><br>
+  </nav>
 
-    <!-- Highlighted text with adjusted font size, color, and padding -->
-    <p class="highlighted-text">
-       Through painting and media-based practice, I express the invisible flows of energy that arise from interactions between organic and digital systems. Inspired by cybernetics, posthumanism, and the life sciences, I visualize energy in abstract, fluid forms. A recurring motif in my work is the tentacle—a symbolic and sensory tool that reaches across boundaries to imagine new states of being and connection.
+  <br><br>
+  <div class="card">
+    <!-- 참고: <a>에는 src/alt가 적용되지 않음. 이미지 보이게 하려면 안에 <img> 필요 -->
+    <a href="main" style="text-align:center" src="https://yeoru.github.io/static/title_img.gif" alt="home"></a>
+  </div>
+  <br><br>
 
-    </p>
+  <h2 class="highlighted-text" style="text-align:left">
+    Hello chaosmos.<br>
+    Yang Yeong ju is a painter and media artist who explores the energetic transactions between humans, technology, and the environment.
+  </h2>
 
-    <br><br><br>
-    <footer>
-        <a href="https://www.instagram.com/yang_yeong/" target="_blank" rel="noopener noreferrer">
-            <img src="https://yeoru.github.io/static/instagram.svg" alt="" srcset="">
-        </a> &nbsp;
-        <a href="https://www.facebook.com/0Yangyeong" target="_blank" rel="noopener noreferrer">
-            <img src="https://yeoru.github.io/static/facebook-f.svg" alt="" srcset="">
-        </a>
-    </footer>
+  <br><br><br><br>
+
+  <p class="highlighted-text">" 
+    Through painting and media-based practice,<br>
+I express the invisible flows of energy that arise from interactions between organic and digital systems.<br>
+Inspired by cybernetics, posthumanism, and the life sciences,<br>
+I visualize energy in abstract, fluid forms.<br><br>
+
+We no longer simply consume information—<br>
+we generate it, replicate it, mutate it.<br>
+Desire, too, is no longer a private, silent thing.<br>
+It is broadcast, amplified, accelerated by systems we created and can no longer fully control.<br><br>
+
+I've been exploring <i>chaosmos</i> through painting since 2017.<br>
+In 2023, this project began with a question:<br>
+Where does desire come from?<br>
+And how does it transform when it spreads—like a virus—across networks of people and media?<br><br>
+
+I was drawn to the behavior of viruses:<br>
+their capacity to mutate, to resist, to pass invisibly from one host to another.<br>
+I wondered whether desire behaves the same way—changing shape as it travels,<br>
+always contagious, never still.<br><br>
+
+To express this, I turned to both analog and digital materials.<br>
+With analog stamps, I explored how repetition can contain variation.<br>
+Even with the same stamp, no two impressions are identical.<br>
+Each mark holds a mutation, however slight.<br>
+And in that imperfection, I saw the texture of desire.<br><br>
+
+and AI, became a space of retranslation.<br>
+It doesn't merely copy analog forms—it absorbs their logic, distorts them, reimagines them.<br>
+The outputs are not simulations, but hybrids—<br>
+somewhere between memory and machine,<br>
+between the bodily and the coded.<br><br>
+
+I believe this in-between space—where analog textures and digital systems collide—<br>
+is where something new emerges.<br>
+Not reproduction, but transformation.<br>
+Not repetition, but entropy made visible.<br><br>
+
+Desire, like gravity or atoms, is unseen.<br>
+But it moves us.<br>
+It binds people, drives choices, alters systems.<br>
+It is smaller than language, but larger than logic.<br><br>
+
+And so I continue to follow it.<br>
+Not to define it,<br>
+but to observe its traces—<br>
+in form, in media,<br>
+in what we click, in what we choose,<br>
+and in what remains unseen.
+  </p>
+
+  <br><br><br>
+  <footer>
+    <a href="https://www.instagram.com/yang_yeong/" target="_blank" rel="noopener noreferrer">
+      <img src="https://yeoru.github.io/static/instagram.svg" alt="">
+    </a>
+    &nbsp;
+    <a href="https://www.facebook.com/0Yangyeong" target="_blank" rel="noopener noreferrer">
+      <img src="https://yeoru.github.io/static/facebook-f.svg" alt="">
+    </a>
+  </footer>
 </body>
-
 </html>
