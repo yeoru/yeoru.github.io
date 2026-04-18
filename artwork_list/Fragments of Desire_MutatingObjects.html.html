@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions of Desire, 2025</title>
+  <style>
+    /* Reset */
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .description { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: left; }
+    .description p { font-size: 18px; margin-bottom: 20px; font-weight: 300; }
+    
+    /* ✅ 캡션 스타일 추가 */
+    .caption {
+      color: #888;            /* 회색 */
+      font-style: italic;     /* 기울임꼴 */
+      font-size: 16px;
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+
+    .description a { color: #66ccff; text-decoration: none; border-bottom: 1px solid #66ccff; transition: 0.3s; }
+    .gallery img { width: 100%; max-width: 1000px; margin: 60px auto; display: block; border-radius: 10px; opacity: 0.95; }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <section class="description">
+<p><em>"Fragments of Desire: Mutating Objects" (2025.06) in Artificial Dreams II · Grand Palais Immersif</em></p><br>
+
+<p>
+  "Fragments of Desire: Mutating Objects" is a video art piece exploring the evolution of desire within digital networks. 
+  By synthesizing stamp art imagery—generated through a proprietary AI model—with metadata harvested from YouTube, 
+  the work presents mutating visual forms that rhythmically traverse the boundary between organic memory and machine logic.
+</p>
+
+<p>
+  In this work, mutated viral fragments born of generative algorithms transform evolving digital traces into fluid, quasi-biological structures. 
+  The continuous reconstruction of imagery, interspersed with fragments of text, visualizes how desire fragments and evolves amidst the landscapes of late capitalism and posthumanism.
+</p>
+
+<p>
+  Conceived in 2025—at a time of soaring AI stocks and a burgeoning sense of diminished human agency—this video work pairs AI-generated music with an immersive dance performance. 
+  It poses an intuitive inquiry into desire: a contagious, ever-shifting force existing between the bodily and the coded, a power that ultimately transcends the scale of the individual.
+</p> <br>
+
+<p class="caption">
+  Video Art, 1080x1920, 03:03
+</p>
+
+<p>
+      <a href="https://www.facebook.com/reel/1454835032210865"
+         target="_blank" rel="noopener noreferrer">Preview</a>
+    </p>
+
+  </section> ```
+  </section>
+
+<section class="gallery">
+  <img src="../static/Fragments of Desire_MutatingObjects1.png" alt="Transaction of Desires image 3" class="fade-in">
+  <img src="../static/Fragments of Desire_MutatingObjects2.jpg" alt="Transaction of Desires image 1" class="fade-in">
+  <img src="../static/Fragments of Desire_MutatingObjects3.jpg" alt="Transaction of Desires image 2" class="fade-in">
+  <img src="../static/Fragments of Desire_MutatingObjects4.jpg" alt="Transaction of Desires image 3" class="fade-in">
+</section>
+
+
+
+  <script>
+    // 스크롤 시 이미지 부드럽게 등장
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions of Desire, 2025</title>
+  <style>
+    /* Reset */
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .description { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: left; }
+    .description p { font-size: 18px; margin-bottom: 20px; font-weight: 300; }
+    
+    /* ✅ 캡션 스타일 추가 */
+    .caption {
+      color: #888;            /* 회색 */
+      font-style: italic;     /* 기울임꼴 */
+      font-size: 16px;
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+
+    .description a { color: #66ccff; text-decoration: none; border-bottom: 1px solid #66ccff; transition: 0.3s; }
+    .gallery img { width: 100%; max-width: 1000px; margin: 60px auto; display: block; border-radius: 10px; opacity: 0.95; }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <section class="description">
+    <p><em>"Transaction of Desires"(2025.05) in ISEA2025 · Seoul Arts Center</em></p> <br>
+
+    <p>
+      <em>"Transaction of Desires"</em> is an interactive installation that explores desire as a viral and mutating force.
+      The work combines analog stamp-based painting with digital retranslation, creating hybrid images that shift
+      between physical textures and machine logic.
+    </p>
+
+    <p>
+      In real time, audience input is processed through the <strong>YangYeong model</strong>, classifying it into
+      <strong>16 categories of desire</strong> using natural language processing. The results are instantly visualized
+      as dynamic images and sounds, while a <strong>live YouTube API connection</strong> integrates streaming data,
+      amplifying the collective ecosystem of desires.
+    </p>
+
+    <p>
+      The installation turns the exhibition space into a living field where personal impulses spread, transform,
+      and collide with others.
+    </p> <br>
+
+    <p class="caption">
+      PC, monitor & projection, pedestal, live image generation and screening, sound, interpretation card, variable dimensions, 2025<br>
+      Collaborated with Philip Liu (Sound Support)
+    </p>
+
+    <p>
+      <a href="https://www.isea-symposium-archives.org/art-events/transaction-of-desires-by-yeongju-yang/"
+         target="_blank" rel="noopener noreferrer">View on ISEA Archive</a>
+    </p>
+  </section>
+
+<section class="gallery">
+  <img src="../static/Transaction_of_desires_202505_isea2025.jpg" alt="Transaction of Desires image 1" class="fade-in">
+  <img src="../static/Transaction_of_desires_2025_1.jpg" alt="Transaction of Desires image 2" class="fade-in">
+  <img src="../static/Transaction_of_desires_2025_2.jpg" alt="Transaction of Desires image 3" class="fade-in">
+  <img src="../static/Transaction_of_desires_2025_3.jpg" alt="Transaction of Desires image 4" class="fade-in">
+  <img src="../static/Transaction_of_desires_2025_4.jpg" alt="Transaction of Desires image 5" class="fade-in">
+  <img src="../static/Transaction_of_desires_2025_5.jpg" alt="Transaction of Desires image 6" class="fade-in">
+</section>
+
+
+
+  <script>
+    // 스크롤 시 이미지 부드럽게 등장
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
