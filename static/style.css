@@ -48,7 +48,7 @@
 /* 현재 선택된 메뉴 */
 .site-nav a.selected {
   font-weight: 600;
-  border-bottom-color: #000;
+  border-bottom-color: transparent;
 }
 
 /* 모바일 화면일 때 */
