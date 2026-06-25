@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,77 +8,169 @@
   <link rel="stylesheet" href="static/style.css">
 
   <style>
-  body {
-    margin: 0;
-  }
-  .container {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .card {
-    position: relative;
-    width: 100vw;   /* 전체 가로 */
-    height: 100vh;  /* 전체 세로 */
-    overflow: hidden;
-  }
-  .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 비율 유지하며 꽉 채우기 */
-    display: block;
-  }
-  .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
-  }
-  .overlay h3 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;         /* ✅ 글자만 흰색 */
-    background: none;    /* ✅ 혹시 남아있을 배경 제거 */
-  }
-  .overlay p {
-    margin: 4px 0 0;
-    font-size: 16px;
-    opacity: 0.9;
-    color: #fff;         /* ✅ 글자만 흰색 */
-    background: none;    /* ✅ 배경 제거 */
-  }
-  .card a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  nav {
-    position: sticky;
-    top: 0;
-    background: #fff;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    z-index: 10;
-  }
-  nav a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #333;
-  }
-  nav a.selected {
-    font-weight: bold;
-  }
-</style>
+    body {
+      margin: 0;
+    }
 
+    .container {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+
+      /* 처음 등장 애니메이션 */
+      opacity: 0;
+      animation: cardFadeIn 1.4s ease forwards;
+    }
+
+    /* 카드별로 살짝 시간차 */
+    .card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.35s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+
+      /* 이미지가 서서히 살아나는 느낌 */
+      transform: scale(1.04);
+      filter: brightness(0.92);
+      animation: imageSlowReveal 2.4s ease forwards;
+    }
+
+    .card:nth-child(1) img {
+      animation-delay: 0.1s;
+    }
+
+    .card:nth-child(2) img {
+      animation-delay: 0.35s;
+    }
+
+    .card:nth-child(3) img {
+      animation-delay: 0.6s;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+
+      /* 글자도 살짝 늦게 나타나게 */
+      opacity: 0;
+      transform: translateY(12px);
+      animation: overlayFadeUp 1.2s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .overlay h3 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      background: none;
+    }
+
+    .overlay p {
+      margin: 4px 0 0;
+      font-size: 16px;
+      opacity: 0.9;
+      color: #fff;
+      background: none;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      z-index: 10;
+    }
+
+    nav a {
+      margin-left: 15px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    nav a.selected {
+      font-weight: bold;
+    }
+
+    @keyframes cardFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes imageSlowReveal {
+      from {
+        transform: scale(1.04);
+        filter: brightness(0.88) blur(2px);
+      }
+      to {
+        transform: scale(1);
+        filter: brightness(1) blur(0);
+      }
+    }
+
+    @keyframes overlayFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 사용자가 모션 최소화를 설정한 경우 애니메이션 제거 */
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .card img,
+      .overlay {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -92,8 +185,8 @@
     </div>
   </nav>
 
+  <div class="container">
 
-<div class="container">
     <div class="card">
       <a href="https://yeoru.github.io/artwork_list/transaction_of_desires.html" target="_blank">
         <img src="static/Transaction_of_desires_2025_3.jpg" alt="Transaction of desires">
@@ -103,31 +196,28 @@
         </div>
       </a>
     </div>
-<br>
 
     <div class="card">
       <a href="https://yeoru.github.io/artwork_list/Fragments of Desire_MutatingObjects.html" target="_blank">
-        <img src="static/Fragments of Desire_MutatingObjects2.jpg" alt="Fragments of Desire_MutatingObjects">
+        <img src="static/Fragments of Desire_MutatingObjects2.jpg" alt="Fragments of Desire: Mutating Objects">
         <div class="overlay">
-          <h3>Fragments of Desire : MutatingObjects</h3>
+          <h3>Fragments of Desire : Mutating Objects</h3>
           <p>Video Art · 2025.04</p>
         </div>
       </a>
     </div>
-  </div>
-  <br>
 
-      <div class="card">
+    <div class="card">
       <a href="https://yeoru.github.io/artwork_list/infected desires.html" target="_blank">
-        <img src="static/Infected Desires_2024_1.jpg" alt="Fragments of Desire_MutatingObjects">
+        <img src="static/Infected Desires_2024_1.jpg" alt="Infected Desires">
         <div class="overlay">
           <h3>Infected Desires</h3>
-          <p>Video Art · 2024.10</p>
+          <p>Interactive Installation · 2024.10</p>
         </div>
       </a>
     </div>
+
   </div>
-  <br>
-  
 </body>
 </html>
+```
