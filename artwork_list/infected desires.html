@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infected Desires, 2024</title>
+  <style>
+    /* Reset */
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .description { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: left; }
+    .description p { font-size: 18px; margin-bottom: 20px; font-weight: 300; }
+    
+    /* ✅ 캡션 스타일 추가 */
+    .caption {
+      color: #888;            /* 회색 */
+      font-style: italic;     /* 기울임꼴 */
+      font-size: 16px;
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+
+    .description a { color: #66ccff; text-decoration: none; border-bottom: 1px solid #66ccff; transition: 0.3s; }
+    .gallery img { width: 100%; max-width: 1000px; margin: 60px auto; display: block; border-radius: 10px; opacity: 0.95; }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <section class="description">
+
+<p><em>"Infected Desires"(2024) · Artience Daejeon × KRIBB</em></p> <br>
+
+<p>
+  <em>"Infected Desires"</em> is an interactive installation that explores desire as a viral force spreading through media environments, digital networks, and collective imagination.
+</p>
+
+<p>
+  Based on fictional news articles developed with virology researchers, participants select a desire from article-like thumbnails. The selected desire is transformed through a live image-generation process and projected as a new visual entity.
+</p>
+
+<p>
+  These entities move through a dynamic field resembling an artificial immune system, continuously seeking new paths of transmission.
+</p> <br>
+
+<p class="caption">
+  PC, monitos, pedestal, live image generation and screening, interpretation card, 2-channel sound, variable dimensions, 2024 <br>
+  Developed in collaboration with Dr. Jihyun Yang and Dr. Doojin Kim
+</p> <br>
+
+
+    <p>
+      <a href="https://vimeo.com/1203966170?fl=pl&fe=sh"
+         target="_blank" rel="noopener noreferrer"> View on Exhibition </a>
+    </p>
+  </section>
+
+<section class="gallery">
+  <img src="../static/Infected Desires_2024_1.jpg" alt="Infected Desires_2024_image1" class="fade-in">
+  <img src="../static/Infected Desires_2024_2.jpg" alt="Infected Desires_2024_image2" class="fade-in">
+  <img src="../static/Infected Desires_2024_3.jpg" alt="Infected Desires_2024_image3" class="fade-in">
+  <img src="../static/Infected Desires_2024_4.jpg" alt="Infected Desires_2024_image4" class="fade-in">
+</section>
+
+
+
+  <script>
+    // 스크롤 시 이미지 부드럽게 등장
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
