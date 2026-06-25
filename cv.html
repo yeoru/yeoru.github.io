@@ -35,6 +35,13 @@
       padding: 0 20px;
     }
 
+    /* CV 이미지 보호 */
+   .protected-cv {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
     /* footer 아이콘은 작게 고정 (전역 img의 영향 차단) */
     footer img {
       width: 18px !important;
@@ -45,9 +52,6 @@
     }
   </style>
 </head>
-
-</head>
-
 
 <body>
   <nav class="site-nav">
@@ -61,22 +65,22 @@
     </div>
   </nav>
 
+  <h2 class="top-h2" style="text-align:left">CV</h2>
+  <br>
 
+  <img src="https://yeoru.github.io/static/home.png" alt="home">
 
-    <h2 class="top-h2" style="text-align:left">CV</h2>
-    <br>
-    <img src="https://yeoru.github.io/static/home.png" alt="home">
-    <br><br>
-    <br><br>
+  <br><br>
+  <br><br>
 
-    <img src="static/cv_list.png" alt="Yang Yeong CV">
+  <img src="static/cv_list.png" alt="Yang Yeong CV" class="protected-cv" oncontextmenu="return false;" draggable="false">
 
-    <br>
-    <br>
-    <br>
-    <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
- <footer>
+  <footer>
     <a href="https://www.instagram.com/yang_yeong/" target="_blank" rel="noopener noreferrer">
       <img src="https://yeoru.github.io/static/instagram.svg" alt="">
     </a>
@@ -85,6 +89,14 @@
       <img src="https://yeoru.github.io/static/facebook-f.svg" alt="">
     </a>
   </footer>
+
+  <script>
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.classList.contains('protected-cv')) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 
 </html>
