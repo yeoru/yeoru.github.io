@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow and Shield, 2024</title>
+  <style>
+    /* Reset */
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .description { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: left; }
+    .description p { font-size: 18px; margin-bottom: 20px; font-weight: 300; }
+    
+    /* ✅ 캡션 스타일 추가 */
+    .caption {
+      color: #888;            /* 회색 */
+      font-style: italic;     /* 기울임꼴 */
+      font-size: 16px;
+      margin-top: -10px;
+      margin-bottom: 40px;
+    }
+
+    .description a { color: #66ccff; text-decoration: none; border-bottom: 1px solid #66ccff; transition: 0.3s; }
+    .gallery img { width: 100%; max-width: 1000px; margin: 60px auto; display: block; border-radius: 10px; opacity: 0.95; }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <section class="description">
+<p><em>"Flow and Shield"(2024) · Artience Daejeon × KRIBB</em></p> <br>
+
+<p>
+  <em>"Flow and Shield"</em> is an interactive installation that explores themes of viruses and immunity, where desire is understood as a force that spreads, transforms, and mutates across bodies, media environments, and collective imagination.
+</p>
+
+<p>
+  Visitors physically interact with a rotating wooden structure, pushing and pulling it with their bodies to generate virus-like digital forms in real time.
+</p>
+
+<p>
+  The wooden structure also functions as a system of defense and release: participants can either protect their desire-objects by controlling the structure, or let them re-enter the field of contagion.
+</p>
+
+<p>
+  The projected entities on the floor are capable of simultaneously recognizing multiple participants. Among them, the most dominant entity gradually absorbs and transforms the others through a process of viral assimilation, where weaker entities are drawn into its influence and partially integrated.
+</p>
+
+<p>
+  In some cases, this dynamic leads to the emergence of a single dominant entity remaining on the surface, shaped by continuous competition and adaptation within the system.
+</p>
+
+<p>
+  When a participant is detected by the camera, corresponding sounds are triggered, creating a responsive and immersive environment where movement, image, sound, and bodily interaction continuously affect one another.
+</p> <br>
+
+<p class="caption">
+  PC, projector, Kinect sensor, rotating wooden installation, live screening, sound, variable dimensions, 2024 <br>
+  Collaborated with Hyun Seung-cheol (Technology Support), Philip Liu (Sound Support), BAUMHAND (Woodwork Support)
+</p> <br>
+
+<br>
+
+
+    <p>
+      <a href="https://vimeo.com/1204126972/eba7fad0c5?share=copy&fl=sv&fe=ci"
+         target="_blank" rel="noopener noreferrer"> Preview on Exhibition </a>
+    </p>
+  </section>
+
+<section class="gallery">
+  <img src="../static/Flow and Shield_2024_1.png" alt="Flow and Shield_2024_image1" class="fade-in">
+  <img src="../static/Flow and Shield_2024_2.jpg" alt="Flow and Shield_2024_image2" class="fade-in">
+  <img src="../static/Flow and Shield_2024_3.jpg" alt="Flow and Shield_2024_image3" class="fade-in">
+  <img src="../static/Flow and Shield_2024_4.jpg" alt="Flow and Shield_2024_image4" class="fade-in">
+</section>
+
+
+
+  <script>
+    // 스크롤 시 이미지 부드럽게 등장
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
