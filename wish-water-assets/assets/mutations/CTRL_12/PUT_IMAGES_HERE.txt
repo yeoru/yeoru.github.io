@@ -1,0 +1,2 @@
+001.png는 작가가 이번에 제공한 투명 PNG 원본입니다.
+추가 변이는 002.png, 003.png 순으로 넣고 python scripts/build_assets.py를 실행하세요.

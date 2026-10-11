@@ -488,3 +488,13 @@ html.has-cursor .cursor-ring.is-down { width: 22px; height: 22px; margin: -11px 
 .lb-label { font-size: var(--t-xs); color: var(--muted); margin-left: 10px; }
 
 .paint-item .cap span:last-child { white-space: nowrap; }
+
+/* Media Art is the main body of work: wider door, larger tab */
+.doors { grid-template-columns: 2fr 1fr; }
+.door--paper h3 { font-size: var(--t-xl); }
+.door--screen h3 { font-size: clamp(2.75rem, 1.2rem + 5vw, 5.5rem); }
+.tab#tab-media { font-size: var(--t-2xl); }
+.tab#tab-painting { font-size: var(--t-lg); }
+.tabs { align-items: flex-end; }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } .door--paper { min-height: 50vh; } }
+.door--paper img { padding: 16% 12% 34%; }

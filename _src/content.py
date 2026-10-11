@@ -77,11 +77,11 @@ HOME = {
         "Lately I sort desire into sixteen types,<br>then mix them to see which new desires appear.<br>And I am exploring a new question:<br>technology has made the resolution of our screens ever higher.<br>In which direction, then, is human resolution moving?<br>How are our senses and our desires working now?",
         "And so I continue to follow it.<br>Not to define it,<br>but to observe its traces—<br>in form, in media,<br>in what we click, in what we choose,<br>and in what remains unseen.",
     ],
-    "door_media_title": "Media art",
+    "door_media_title": "Media Art",
     "door_media_text": "Interactive installations, video and narrative systems that follow desire as a viral force.",
     "door_media_image": "assets/img/media/transactions-of-desire/01.webp",
-    "door_painting_title": "Painting & Print",
-    "door_painting_text": "Where the chaosmos began: paintings on canvas and digital prints.",
+    "door_painting_title": "Material Works",
+    "door_painting_text": "Paintings and prints: the pigment and texture that feed the media work.",
     "door_painting_image": "assets/img/painting/projections-1-s.webp",
 }
 
