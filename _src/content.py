@@ -93,6 +93,7 @@ HOME = {
 MEDIA = [
     {
         "slug": "transactions-of-desire",
+        "big_images": 3,   # 갤러리에서 크게 보일 사진 수 (02.webp 부터). 나머지는 작은 사진으로 나열
         "title": "Transactions of Desire",
         "note": "Shown at ISEA2025 under the title <i>Transaction of Desires</i>.",
         "year": "2025",
@@ -283,7 +284,8 @@ PAINTING = [
      "images": [("mutating-objects-print-2", ""), ("mutating-objects-installation", "Installation view")]},
     {"title": "Contact (접촉)", "year": "2016", "medium": "Oil on canvas", "size": "72.5 × 53 cm", "images": [("blue-cell", "")]},
     {"title": "Sonata of Addiction (중독의 소나타)", "year": "2016", "medium": "Oil on canvas", "size": "100 × 80.3 cm", "images": [("blue-cluster", "")]},
-    {"title": "5-dimension", "year": "2016", "medium": "Oil and hwaseonji (rice paper) on canvas", "size": "131 × 75 cm", "images": [("reclining-figure", "")]},
+    # 잠시 숨김 — 다시 보이게 하려면 아래 줄 앞의 # 를 지우세요
+    # {"title": "5-dimension", "year": "2016", "medium": "Oil and hwaseonji (rice paper) on canvas", "size": "131 × 75 cm", "images": [("reclining-figure", "")]},
     {"title": "Firestone", "year": "2016", "medium": "Oil on canvas", "size": "72.7 × 60.6 cm", "images": [("firestone", "")]},
     {"title": "Primavera", "year": "2017", "medium": "Oil on canvas", "size": "50 × 65 cm", "images": [("forest-window", "")]},
     {"title": "Tree of Idea (관념의 나무)", "year": "2016", "medium": "Oil on canvas", "size": "116.8 × 91 cm", "images": [("blue-tree", "")]},

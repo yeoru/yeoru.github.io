@@ -90,7 +90,7 @@
   /* ---------- painting lightbox (each painting can have several views) ---------- */
   var lb = document.querySelector(".lightbox");
   if (lb) {
-    var buttons = Array.prototype.slice.call(document.querySelectorAll(".paint-item button"));
+    var buttons = Array.prototype.slice.call(document.querySelectorAll(".paint-item button, .thumb-item button"));
     var seq = [], firstOf = [];   // every view of every painting, in order
     buttons.forEach(function (b, i) {
       var views = (b.getAttribute("data-views") || "").split("|");

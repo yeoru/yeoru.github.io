@@ -498,3 +498,13 @@ html.has-cursor .cursor-ring.is-down { width: 22px; height: 22px; margin: -11px 
 .tabs { align-items: flex-end; }
 @media (max-width: 760px) { .doors { grid-template-columns: 1fr; } .door--paper { min-height: 50vh; } }
 .door--paper img { padding: 16% 12% 34%; }
+
+/* small thumbnails under the main images */
+.thumb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: clamp(16px, 2vw, 28px); }
+.thumb-item { margin: 0; }
+.thumb-item button { display: block; width: 100%; }
+.thumb-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; opacity: .85; transition: opacity .3s; }
+.thumb-item button:hover img, .thumb-item button:focus-visible img { opacity: 1; }
+/* the viewer sits above the custom cursor, so show the normal cursor inside it */
+html.has-cursor .lightbox, html.has-cursor .lightbox * { cursor: auto !important; }
+html.has-cursor .lightbox button { cursor: pointer !important; }

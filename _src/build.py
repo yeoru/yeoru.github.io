@@ -308,23 +308,44 @@ def build_portfolio():
 
 
 # ------------------------------------------------------------------ work pages
-def gallery(slug, title):
-    figs, k = [], 2
+def gallery(slug, title, big=None):
+    """Large images first; if big is set, only that many stay large and the rest become a thumbnail grid."""
+    figs, thumbs, k = [], [], 2
     while True:
         rel = f"assets/img/media/{slug}/{k:02d}.webp"
         if not os.path.exists(os.path.join(ROOT, rel)):
             break
-        size = webp_size(rel)
-        cls = ""
-        if size:
-            w, h = size
-            cls = "wide" if (w / h > 1.2 and w >= 1100) else ("small" if w < 900 else "")
-        figs.append([cls, f'<img src="../{rel}" alt="{e(title)}, view {k}"{wh_attr(rel)} loading="lazy" decoding="async">'])
+        if big is not None and (k - 1) > big:
+            srel = f"assets/img/media/{slug}/{k:02d}-s.webp"
+            thumbs.append(f'      <figure class="thumb-item"><button type="button" data-views="../{rel}" data-labels="" '
+                          f'data-title="{e(title)}" data-meta="" data-cursor="Open"><img src="../{srel}" alt="{e(title)}, view {k}" '
+                          f'loading="lazy" decoding="async"></button></figure>')
+        else:
+            size = webp_size(rel)
+            cls = ""
+            if size:
+                w, h = size
+                cls = "wide" if (w / h > 1.2 and w >= 1100) else ("small" if w < 900 else "")
+            figs.append([cls, f'<img src="../{rel}" alt="{e(title)}, view {k}"{wh_attr(rel)} loading="lazy" decoding="async">'])
         k += 1
     halves = [i for i, f in enumerate(figs) if f[0] != "wide"]
     if len(halves) % 2 == 1:
         figs[halves[-1]][0] = "solo"
-    return "\n".join(f'      <figure class="{c}">{img}</figure>' for c, img in figs)
+    out = "\n".join(f'      <figure class="{c}">{img}</figure>' for c, img in figs)
+    if thumbs:
+        out += '\n    </section>\n  <section class="thumb-grid wrap" aria-label="More views">\n' + "\n".join(thumbs)
+    return out
+
+
+LIGHTBOX = """<dialog class="lightbox" aria-label="Image viewer">
+  <button class="lb-close" type="button">Close</button>
+  <div class="lb-stage"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt=""></div>
+  <div class="lb-bar">
+    <div><span class="lb-title"></span> <span class="lb-meta muted"></span> <span class="lb-label"></span></div>
+    <div class="lb-ctrl"><button class="lb-prev" type="button">Previous</button><button class="lb-next" type="button">Next</button></div>
+  </div>
+</dialog>
+"""
 
 
 def build_work(i, w):
@@ -362,13 +383,13 @@ def build_work(i, w):
     </div>
   </section>
   <section class="gallery wrap" aria-label="Views of the work">
-{gallery(slug, w['title'])}
+{gallery(slug, w['title'], w.get('big_images'))}
   </section>
   <div class="wrap">
     <a class="next-work" href="{nxt['slug']}.html"><span>Next work</span><strong>{e(nxt['title'])}</strong></a>
   </div>
 </main>
-""" + page_end(1)
+""" + (LIGHTBOX if w.get("big_images") is not None else "") + page_end(1)
     write(f"works/{slug}.html", out)
 
 
