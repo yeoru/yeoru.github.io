@@ -134,7 +134,7 @@ def nav(current, depth):
     joined = "\n    ".join(links)
     return f"""<a class="skip" href="#main">Skip to content</a>
 <header class="site-nav">
-  <a class="brand" href="{r}index.html"><span class="brand-en">{e(SITE['name_en'])}</span><span class="brand-ko" lang="ko">{e(SITE['name_ko'])}</span></a>
+  <a class="brand" href="{r or './'}"><span class="brand-en">{e(SITE['name_en'])}</span><span class="brand-ko" lang="ko">{e(SITE['name_ko'])}</span></a>
   <nav class="nav-links" aria-label="Main">
     {joined}
   </nav>
