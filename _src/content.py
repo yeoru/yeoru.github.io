@@ -19,7 +19,7 @@ SITE = {
     "name_ko": "양영주",
     # 검색엔진에 '같은 사람'이라고 알려 주는 다른 표기들
     "other_names": ["양영주", "Yang Yeongju", "Yang YeongJu"],
-    "role": "Painter and media artist",
+    "role": "Media artist and painter",
     "based_in": "Seoul, South Korea",
     "email": "yeongju.yvonne@gmail.com",
     "email_lab": "transaction.artlab@gmail.com",
@@ -52,15 +52,15 @@ HOME = {
     "title_line_1": "Hello",
     "title_line_2": "chaosmos.",
     # 첫 화면 소개 문장 (가장 많이 읽히는 한 문장)
-    "intro": "Yeongju Yang is a painter and media artist researching desire and <i>trans-action</i>: the energy that passes between humans, technology and the environment, and changes each of them on the way.",
+    "intro": "Yeongju Yang is a media artist and painter researching desire and <i>trans-action</i>: the energy that passes between humans, technology and the environment, and changes each of them on the way.",
     # 지금 하고 있는 연구 한 줄 (비우려면 "" 로)
     # 첫 화면 전시 안내 두 줄 (비우려면 "" 로)
     "now_label": "Now",
     "now": "“Silver Egg: The Eros of Media Art”, ZKM, Karlsruhe, until 21 February 2027.",
     "upcoming_label": "Upcoming",
     "upcoming": "“Human Becoming”, Shinbuldang Art Center, Cheonan, 5–14 December 2026.",
-    "hint_mouse": "Move to leave ink. Click to press a stamp.",
-    "hint_touch": "Drag to leave ink. Tap to press a stamp.",
+    "hint_mouse": "Everything is trans-action.",
+    "hint_touch": "Drag and press a stamp.",
     "hero_alt": "An ink painting slowly turning into a head",
     "statement_heading": "Statement",
     # 스테이트먼트: 연(stanza)마다 하나의 "..." , 줄바꿈은 <br>
@@ -308,7 +308,7 @@ PAINTING = [
 #  False 로 둔 이력은 HTML 에 아예 들어가지 않아서 검색에도 잡히지 않아요.
 # ---------------------------------------------------------------------
 CV = {
-    "intro": "Yeongju Yang (양영주) is a painter and media artist based in Seoul, researching desire and <i>trans-action</i> between humans, technology and the environment. Research at Yonsei University on trans-action in interactive art links cybernetics, Eastern philosophy and the aesthetics of change.",
+    "intro": "Yeongju Yang (양영주) is a media artist and painter based in Seoul, researching desire and <i>trans-action</i> between humans, technology and the environment. Research at Yonsei University on trans-action in interactive art links cybernetics, Eastern philosophy and the aesthetics of change.",
     "note": "",   # 소개 아래 작은 안내문 (비우면 표시 안 함)
     "sections": [
         ("Selected exhibitions", [

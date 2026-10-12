@@ -200,7 +200,7 @@ def build_home():
         now += f'\n      <p class="hero-now"><span>{e(HOME["upcoming_label"])}</span>{HOME["upcoming"]}</p>'
     years = sorted({w["year"] for w in MEDIA})
     span = years[0] + ("–" + years[-1] if len(years) > 1 else "")
-    out = head(f"{SITE['name_en']} {SITE['name_ko']} — {SITE['role'].lower()}", desc, "", "paper", 0, extra=ld(person))
+    out = head(f"{SITE['name_en']} {SITE['name_ko']}", desc, "", "paper", 0, extra=ld(person))
     out += "<body data-ink-intro>\n" + nav("", 0) + f"""<main id="main">
   <section class="hero wrap">
     <h1 class="hero-title display"><span>{HOME['title_line_1']}</span><span class="l2">{HOME['title_line_2']}</span></h1>
