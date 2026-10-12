@@ -508,3 +508,15 @@ html.has-cursor .cursor-ring.is-down { width: 22px; height: 22px; margin: -11px 
 /* the viewer sits above the custom cursor, so show the normal cursor inside it */
 html.has-cursor .lightbox, html.has-cursor .lightbox * { cursor: auto !important; }
 html.has-cursor .lightbox button { cursor: pointer !important; }
+
+/* early works: folded at the bottom of Material Works */
+.early { margin-top: clamp(64px, 8vw, 120px); border-top: 1px solid var(--line); }
+.early summary { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 22px 0; cursor: pointer; list-style: none;
+  font-family: var(--f-display); font-weight: 300; font-size: var(--t-lg); }
+.early summary::-webkit-details-marker { display: none; }
+.early summary::after { content: "+"; font-family: var(--f-text); font-size: var(--t-lg); margin-left: auto; padding-left: 16px; }
+.early[open] summary::after { content: "–"; }
+.early summary .muted { font-family: var(--f-text); font-size: var(--t-sm); }
+.early-text { font-size: var(--t-sm); margin: 0 0 28px; max-width: 52ch; }
+.early-grid .paint-item { flex-basis: calc(var(--r) * 200px); }
+.early-grid .paint-item .cap { font-size: var(--t-xs); }

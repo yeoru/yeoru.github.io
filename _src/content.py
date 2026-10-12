@@ -268,6 +268,13 @@ MEDIA = [
 #  year / medium / size 가 "" 이면 표시하지 않습니다.
 #  TODO 표시된 것은 제목·연도를 확인해서 채워 주세요.
 # ---------------------------------------------------------------------
+# 이 연도보다 이전 작품은 Material Works 맨 아래 접힌 "초기작" 칸으로 들어가요
+EARLY = {
+    "before": 2018,
+    "title": "Early paintings, 2016–2017",
+    "text": "Where the chaosmos began: early oil paintings of cells, contact and contagion.",
+}
+
 PAINTING = [
     {"title": "Fragments of Desire: Projections 1", "year": "2024", "medium": "Oil and acrylic with mirror fragments on canvas", "size": "",
      "images": [("projections-1", "Full view"), ("projections-1-detail", "Detail")]},

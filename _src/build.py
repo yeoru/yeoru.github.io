@@ -16,7 +16,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from content import SITE, NAV, HOME, MEDIA, PAINTING, CV, CONTACT, ARCHIVE  # noqa: E402
+from content import SITE, NAV, HOME, MEDIA, PAINTING, EARLY, CV, CONTACT, ARCHIVE  # noqa: E402
 
 
 def _year(item):
@@ -27,6 +27,8 @@ def _year(item):
 # newest first; works from the same year keep the order written in content.py
 MEDIA = sorted(MEDIA, key=_year, reverse=True)
 PAINTING = sorted(PAINTING, key=_year, reverse=True)
+CURRENT = [p for p in PAINTING if _year(p) >= EARLY["before"]]
+EARLY_WORKS = [p for p in PAINTING if _year(p) < EARLY["before"]]
 
 e = html.escape
 URL = SITE["url"]
@@ -229,7 +231,7 @@ def build_home():
     </a>
     <a class="door door--paper" href="works/index.html#painting" data-cursor="Enter">
       <img src="{HOME['door_painting_image']}" alt="" loading="lazy" decoding="async">
-      <span class="door-count">{len(PAINTING)} works</span>
+      <span class="door-count">{len(CURRENT)} works</span>
       <div><h3>{HOME['door_painting_title']}</h3><p>{HOME['door_painting_text']}</p></div>
     </a>
   </section>
@@ -255,7 +257,7 @@ def build_portfolio():
           <span class="info"><b>{e(w['type'].split(',')[0])}</b>{e(w['list_venue'])}</span>
         </a>
       </li>""")
-    items = []
+    items, early = [], []
     for p in PAINTING:
         meta = ", ".join(x for x in (p["year"], p["medium"], p.get("size", "")) if x)
         first = p["images"][0][0]
@@ -263,12 +265,17 @@ def build_portfolio():
         labels = "|".join(label for _, label in p["images"])
         size = webp_size(f"assets/img/painting/{first}-s.webp") or (4, 3)
         ratio = round(size[0] / size[1], 3)
-        items.append(f"""      <figure class="paint-item" style="--r:{ratio}">
+        html_item = f"""      <figure class="paint-item" style="--r:{ratio}">
         <button type="button" data-views="{e(views)}" data-labels="{e(labels)}" data-title="{e(p['title'])}" data-meta="{e(meta)}" data-cursor="Open">
           <img src="../assets/img/painting/{first}-s.webp" alt="{e(p['title'])}, painting by {e(SITE['name_en'])}"{wh_attr(f'assets/img/painting/{first}-s.webp')} loading="lazy" decoding="async">
           <figcaption class="cap"><span>{e(p['title'])}</span><span>{e(p['year'])}</span></figcaption>
         </button>
-      </figure>""")
+      </figure>"""
+        (early if _year(p) < EARLY["before"] else items).append(html_item)
+    early_block = ""
+    if early:
+        early_block = (f'<details class="early"><summary><span>{e(EARLY["title"])}</span><span class="muted">{len(early)} works</span></summary>'
+                       f'<p class="early-text muted">{EARLY["text"]}</p><div class="paint-grid early-grid">\n' + "\n".join(early) + '\n    </div></details>')
     names = ", ".join(w["title"] for w in MEDIA[:4])
     out = head(f"Portfolio — {SITE['name_en']} {SITE['name_ko']}",
                f"Media art and painting by {SITE['name_en']} ({SITE['name_ko']}): {names} and more.",
@@ -278,7 +285,7 @@ def build_portfolio():
     <h1 class="display">Portfolio</h1>
     <div class="tabs" role="tablist" aria-label="Body of work">
       <button class="tab" role="tab" id="tab-media" aria-controls="media" aria-selected="true">{HOME['door_media_title']}<sup>{len(MEDIA)}</sup>{TAB_LINE}</button>
-      <button class="tab" role="tab" id="tab-painting" aria-controls="painting" aria-selected="false" tabindex="-1">{HOME['door_painting_title']}<sup>{len(PAINTING)}</sup>{TAB_LINE}</button>
+      <button class="tab" role="tab" id="tab-painting" aria-controls="painting" aria-selected="false" tabindex="-1">{HOME['door_painting_title']}<sup>{len(CURRENT)}</sup>{TAB_LINE}</button>
     </div>
   </header>
 
@@ -292,6 +299,7 @@ def build_portfolio():
     <div class="paint-grid">
 {chr(10).join(items)}
     </div>
+    {early_block}
   </section>
 </main>
 <div class="preview" aria-hidden="true"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt=""></div>
