@@ -23,3 +23,9 @@
 .flag-card span{display:none}
 @media(max-width:600px){.masthead{gap:6px}.header-right{gap:7px}.header-right select{width:58px}.header-right #aboutButton{max-width:45px;line-height:1.3}}
 @media(max-height:450px){.country-gate{min-height:0}.country-gate .intro-description{display:none}.country-gate .flag-search{padding:2px 8px}.country-gate .flag-card img{max-height:15px}}
+
+/* Additional conversation shares its main topic's stone and progress marker. */
+.talk-meta{flex-wrap:wrap}.question-kind{color:var(--water);font-family:inherit;font-size:10px;letter-spacing:0;border-left:1px solid var(--line);padding-left:12px}
+.is-thinking::after{content:" · · ·";display:inline-block;animation:thinking-pulse 1.1s ease-in-out infinite}.input-wrap:has(textarea[readonly]){opacity:.75}
+@keyframes thinking-pulse{0%,100%{opacity:.25}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.is-thinking::after{animation:none}}

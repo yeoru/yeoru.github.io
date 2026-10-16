@@ -4,6 +4,7 @@
  const scene=new WishLandscape($('landscape')),sound=new WishStoneSound(),local=R.transport==='local';
  const music=new WishBackgroundMusic(sound,R.musicUrl,updateMusicButton);
  const MUSIC={ko:['♫ 음악 켜기','♫ 음악 끄기','음악을 불러오지 못했어요. 다시 눌러주세요.'],en:['♫ Music on','♫ Music off','Music could not load. Tap to retry.'],de:['♫ Musik an','♫ Musik aus','Musik nicht geladen. Erneut versuchen.'],ja:['♫ 音楽オン','♫ 音楽オフ','音楽を読み込めません。もう一度押してください。'],fr:['♫ Musique on','♫ Musique off','Musique indisponible. Réessaie.']};
+ const FOLLOWUP={ko:'이 이야기를 조금 더',en:'A little more about this',de:'Ein wenig mehr dazu',ja:'この話をもう少し',fr:'Encore un peu sur ce récit'};
  const AUDIO={ko:{enabled:'돌 소리 켜기',synthetic:'임시 합성 돌 소리',choose:'내 돌 소리 파일 선택',hint:'파일은 이 기기에서만 사용해요. 임의 구간을 0.5초·1초·2초로 재생합니다.',test:'소리 들어보기',loaded:'선택한 녹음 사용 중',error:'이 파일을 읽지 못했어요. WAV 또는 MP3로 다시 골라주세요.'},en:{enabled:'Stone sounds on',synthetic:'Temporary synthesized stone sound',choose:'Choose a stone recording',hint:'The file stays on this device. Random 0.5, 1 or 2 second excerpts will play.',test:'Listen',loaded:'Using your recording',error:'Could not read this file. Please try WAV or MP3.'},de:{enabled:'Steingeräusche einschalten',synthetic:'Vorläufiges synthetisches Steingeräusch',choose:'Steinaufnahme auswählen',hint:'Die Datei bleibt auf diesem Gerät. Zufällige Ausschnitte von 0,5, 1 oder 2 Sekunden werden abgespielt.',test:'Anhören',loaded:'Deine Aufnahme wird verwendet',error:'Datei nicht lesbar. Bitte WAV oder MP3 versuchen.'}};
  const I={
  ko:{about:'작품 안내',badge:'체험 시안 · AI 미연결',serverBadge:'서버 시험 · AI 미연결',liveBadge:'참여형 웹아트',specimen:'아직 이름 없는 물결',scene:'말 한 조각이, 돌 하나를 움직입니다.',introTitle:'너의 이야기로<br><em>물길을 열어줘.</em>',introDescription:'우리는 현재 어떻게 변이하고 있을까?',countryLabel:'어느 곳의 이야기를 들려줄래?',countryPlaceholder:'나라 · 문화적 배경 선택',otherCountry:'여러 곳 / 선택하지 않음',countryHint:'국적 대신, 오늘 이야기하고 싶은 곳을 골라도 좋아.',howTime:'30초마다 한 번',howPause:'잠시 멈춰도 괜찮아',howSkip:'건너뛰면 돌은 그대로',consentLabel:'작품 참여와 답변의 연구용 저장에 동의해요.',demoConsent:'동작 확인을 위한 체험에 참여할게요.',start:'물가에 앉기 ↗',answer:'너의 이야기',placeholder:'여기에 너의 이야기를 남겨줘…',pause:'Ⅱ 잠시 멈춤',resume:'▷ 다시 흐르기',skip:'이 돌은 남겨두기',send:'보내기 ↗',sending:'네 이야기가 물가에 닿는 중…',savedError:'이야기는 저장했어. 욕망 분석은 잠시 쉬어갈게.',paused:'시간을 멈췄어. 천천히 써도 괜찮아.',hidden:'자리를 비운 동안 시간을 멈췄어. 준비되면 다시 시작해줘.',ime:'쓰던 글자를 마무리하면 보내줄게.',retry:'연결이 잠시 끊겼어. 글은 이 탭에 남아 있어. 다시 연결해줘.',retryButton:'다시 연결하기',startError:'아직 연결되지 않았어. 잠시 후 다시 시작해줘.',reply:'네가 들려준 이야기를 물가에 놓아둘게.',missing:'이 돌은 그대로 두고, 다음 이야기로 갈게.',finalTitle:'너의 소원이<br><em>흐르기 시작했어.</em>',finalDescription:'남겨둔 돌들도 함께 떠올라. 네가 보낸 마음은 물결 속에 남아 있어.',emptyTitle:'물은 아직<br><em>기다리고 있어.</em>',emptyDescription:'마지막 소원이 비어 있었어. 준비되면 한 줄을 놓아줘.',wishAgain:'소원을 다시 놓기 ↗',trace:'남겨진 마음의 흔적',disclaimer:'이 비율은 작품 안에서 해석한 욕망의 비중이야. 심리검사나 객관적인 확률은 아니야.',demoDisclaimer:'체험 시안의 단어 규칙으로 만든 임시 비율이야. 실제 AI 분석과 연구 데이터가 아니야.',noEvidence:'지금의 말만으로 이름을 붙이지 않았어.',download:'내 기록 내려받기',restart:'새로운 물길',footer:'각자의 이야기가 만나는 물길.',aboutTitle:'물은 이야기를 기억해.',aboutText:'우리는 현재 어떻게 변이하고 있을까?',technical:'질문마다 30초. 시간이 끝나면 작성한 글을 보내고, 빈칸이면 건너뛰어. 일시정지 중에도 쓸 수 있어. AI는 답변을 받은 뒤 해석하며, 글자를 입력할 때마다 전송하지 않아.',demoPrivacy:'이 파일은 시안이야. 답변은 이 탭에서만 처리되고 외부 AI나 연구 서버에 보내지 않아. 새로고침하면 이 체험은 사라져.',serverPrivacy:'시험 데이터로 저장하며 실제 연구 통계에 포함하지 않아. 이름·연락처 등 개인정보는 적지 않아도 돼.',livePrivacy:'선택한 문화적 배경·답변·응답 시간·AI 해석을 양영주의 문화·욕망 연구를 위해 저장해. 답변은 해석을 위해 OpenAI API로 전달돼. 이름·연락처는 적지 말아줘. 건너뛰거나 언제든 창을 닫아 중단할 수 있어.',retention:'보관 기간',days:'일',contact:'문의·삭제 요청',receipt:'참여 기록 번호',remaining:'남은 돌',hint:'Enter 전송 · Shift+Enter 줄바꿈'},
@@ -81,6 +82,7 @@
  function renderState(){
   setText('stoneCount',`${String(s.accepted_count).padStart(2,'0')} / 09`);
   setText('questionStep',`${String(s.next_index+1).padStart(2,'0')} / 09`);setText('contextLabel',countryName(s.country));
+  $('questionKind').hidden=s.question_kind!=='followup';setText('questionKind',FOLLOWUP[lang]);
   $('progressDots').replaceChildren(...D.questions.map((q,i)=>{const dot=document.createElement('span');dot.className=answers[i]===true?'answered':answers[i]===false?'skipped':i===s.next_index?'current':'';return dot;}));
   if(s.image)displayImage(s.image,s.leader);
  }
@@ -89,6 +91,7 @@
   phase='asking';paused=false;if(reset){active=0;pauseMs=0;pauseCount=0;$('answer').value='';setText('charCount','0 / 3000');}
   expirePending=false;$('welcome').hidden=true;$('ending').hidden=true;$('talk').hidden=false;$('retryBox').hidden=true;
   setText('question',s.question);setText('statusMessage','');setText('pauseButton',T().pause);enableForm(true);renderState();saveMeta();
+  $('reply').hidden=!$('reply').textContent.trim();
   // Preserve the active input across async turns, including mobile keyboards.
   $('answer').focus({preventScroll:true});
  }
@@ -97,7 +100,7 @@
   $('startButton').disabled=true;setText('startError','');
   try{
    if(local){s={revision:0,next_index:0,question:D.questions[0][lang],accepted_count:0,cumulative:null,leader:null,image:null,completed:false,final_empty:false,locale:lang,country:$('country').value};}
-   else {await syncConfig();if(!$('consent').checked){ready();return;}const response=await api('/session',{country:$('country').value,locale:lang,consent:true});auth={session_id:response.session_id,session_token:response.session_token};s=response;}
+   else {await syncConfig();if(!$('consent').checked){ready();return;}const response=await api('/session',{country:$('country').value,locale:lang,consent:true,protocol:'adaptive-v4'});auth={session_id:response.session_id,session_token:response.session_token};s=response;}
    $('language').disabled=true;ask();
   }catch{setText('startError',T().startError);$('startButton').disabled=false;}
  }
@@ -113,20 +116,24 @@
    accepted:!!text,reply:text?T().reply:T().missing,instantaneous:v,analysis_status:text?'demo':'missing',flash_image:flash?C.image('DESTR_01',{},'random'):null};
  }
  async function transmit(){
-  phase='sending';enableForm(false);$('retryBox').hidden=true;setText('statusMessage',T().sending);saveMeta();
+  if(phase==='sending')return;
+  phase='sending';enableForm(false);$('retryBox').hidden=true;$('answerForm').setAttribute('aria-busy','true');$('statusMessage').className='status-message is-thinking';setText('statusMessage',T().sending);saveMeta();
   try{
-   const oldIdx=s.next_index,before=s.accepted_count;
+   const oldIdx=s.next_index,before=s.accepted_count,oldKind=s.question_kind||'main';
    const result=local?localTurn(pending):await api('/turn',pending);
-   if(result.analysis_status!=='error')answers[oldIdx]=result.accepted;
+   if(result.analysis_status!=='error'&&oldKind==='main')answers[oldIdx]=result.accepted;
    if(oldIdx===8&&result.accepted)wishText=pending.text;
    if(!local)records.push({question_id:D.questions[oldIdx].id,input:pending.text,...result});
    const submittedText=pending.text;
-   s=result;if(result.accepted&&scene.remove(before)){sound.play();setText('sceneState',s.accepted_count<=5?T().waiting:s.accepted_count<8?T().trickle:T().growing);}pending=null;setText('reply',result.reply);renderState();
+   const removed=result.stone_removed??(result.accepted&&oldKind==='main');
+   s=result;if(removed&&s.accepted_count>before&&scene.remove(before)){sound.play();setText('sceneState',s.accepted_count<=5?T().waiting:s.accepted_count<8?T().trickle:T().growing);}else if(result.stone_sound==='tap'){sound.play(.5);}pending=null;setText('reply',result.reply);renderState();
    if(result.completed||result.final_empty)finish();else{ask();if(result.analysis_status==='error'){$('answer').value=submittedText;setText('charCount',`${submittedText.length} / 3000`);pause('paused');setText('statusMessage',T().savedError);}}
    if(result.flash_image){clearTimeout(flashTimer);displayImage(result.flash_image,'DESTR_01');flashTimer=setTimeout(()=>displayImage(s.image,s.leader),1200);}
    saveMeta();
   }catch{
    phase='error';setText('statusMessage','');setText('retryMessage',T().retry);$('retryBox').hidden=false;saveMeta();
+  }finally{
+   $('answerForm').setAttribute('aria-busy','false');$('statusMessage').className='status-message';
   }
  }
  function submit(trigger){
