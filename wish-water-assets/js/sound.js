@@ -21,5 +21,33 @@
    src.connect(gain);gain.connect(this.context.destination);src.onended=()=>{this.sources.delete(src);src.disconnect();gain.disconnect();};this.sources.add(src);src.start(now,chosen.offset,chosen.duration);return{...chosen,source:this.buffer?'recording':'synthetic'};
   }
  }
- root.WishStoneSound=WishStoneSound;root.WishAudioSegment=segment;
+ class WishBackgroundMusic{
+  constructor(owner,url,onchange=()=>{}){this.owner=owner;this.url=url;this.onchange=onchange;this.enabled=true;this.started=false;this.audio=null;this.gain=null;this.error=false;}
+  get playing(){return !!(this.audio&&!this.audio.paused&&this.owner.context?.state==='running');}
+  async start(){
+   if(!this.enabled||!this.url)return;
+   this.started=true;
+   try{
+    if(!this.owner.unlock())throw new Error('audio_unavailable');
+    if(!this.audio){
+     this.audio=new Audio(this.url);this.audio.loop=true;this.audio.preload='metadata';
+     // Web Audio gain also works on mobile browsers that ignore media.volume.
+     this.gain=this.owner.context.createGain();this.gain.gain.value=.15;
+     this.source=this.owner.context.createMediaElementSource(this.audio);this.source.connect(this.gain);this.gain.connect(this.owner.context.destination);
+     for(const name of ['playing','pause'])this.audio.addEventListener(name,()=>this.onchange());
+     this.audio.addEventListener('error',()=>{this.error=true;this.onchange();});
+    }
+    await this.owner.context.resume();
+    if(!this.enabled)return;
+    await this.audio.play();this.error=false;
+    if(!this.enabled)this.audio.pause();
+   }catch{this.error=true;}
+   this.onchange();
+  }
+  stop(){this.enabled=false;this.audio?.pause();this.onchange();}
+  toggle(){if(this.playing){this.stop();}else{this.enabled=true;return this.start();}}
+  suspend(){this.audio?.pause();this.onchange();}
+  resume(){if(this.started&&this.enabled)return this.start();}
+ }
+ root.WishStoneSound=WishStoneSound;root.WishBackgroundMusic=WishBackgroundMusic;root.WishAudioSegment=segment;
 })(window);
