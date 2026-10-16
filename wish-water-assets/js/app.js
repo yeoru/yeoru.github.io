@@ -4,6 +4,7 @@
  const scene=new WishLandscape($('landscape')),sound=new WishStoneSound(),local=R.transport==='local';
  const music=new WishBackgroundMusic(sound,R.musicUrl,updateMusicButton);
  const MUSIC={ko:['♫ 음악 켜기','♫ 음악 끄기','음악을 불러오지 못했어요. 다시 눌러주세요.'],en:['♫ Music on','♫ Music off','Music could not load. Tap to retry.'],de:['♫ Musik an','♫ Musik aus','Musik nicht geladen. Erneut versuchen.'],ja:['♫ 音楽オン','♫ 音楽オフ','音楽を読み込めません。もう一度押してください。'],fr:['♫ Musique on','♫ Musique off','Musique indisponible. Réessaie.']};
+ const ABOUT_COPY={"ko": ["물 속 다양한 이야기가 필요해.", "우리는 현재 어떻게 변이하고 있을까?", "우리의 진솔한 생각을 입력해야 해. 입력 없이 1분이 지나면 작성한 글을 보내고, 빈칸이면 건너뛰어. 더 생각하고 싶으면 일시정지를 눌러줘. 실시간 ai로 당신과 대화하고 질문을 할거야.", "이름·연락처는 적지 말아줘. 건너뛰거나 언제든 창을 닫아 중단할 수 있어.\n\n선택한 문화적 배경·답변·응답 시간·AI 해석은 양영주의 문화·욕망 연구를 위해 저장할 예정이야. 아주 소중한 인류의 보석으로 간직할거야.\n\n문의: transaction.artlab@gmail.com"], "en": ["The water needs many different stories.", "How are we mutating now?", "Share your honest thoughts. After one minute without typing, your draft is sent; an empty answer is skipped. Pause if you need more time to think. AI will talk with you and ask questions in real time.", "Please do not enter names or contact details. You can skip or close the window at any time.\n\nYour selected cultural context, answers, response timing and AI interpretations will be stored for Yang Yeongju’s research on culture and desire. They will be treasured as precious gems of humanity.\n\nContact: transaction.artlab@gmail.com"], "de": ["Das Wasser braucht vielfältige Geschichten.", "Wie verändern wir uns gerade?", "Teile deine ehrlichen Gedanken. Nach einer Minute ohne Eingabe wird dein Text gesendet; eine leere Antwort wird übersprungen. Pausiere, wenn du mehr Zeit zum Nachdenken brauchst. Eine KI spricht in Echtzeit mit dir und stellt Fragen.", "Bitte gib keine Namen oder Kontaktdaten ein. Du kannst Fragen überspringen oder jederzeit das Fenster schließen.\n\nDein gewählter kultureller Bezug, Antworten, Antwortzeiten und KI-Deutungen werden für Yang Yeongjus Forschung zu Kultur und Wünschen gespeichert. Sie werden als kostbare Schätze der Menschheit bewahrt.\n\nKontakt: transaction.artlab@gmail.com"], "ja": ["水の中には、さまざまな物語が必要なんだ。", "私たちは今、どう変わっているのだろう？", "素直な思いを入力してね。1分間入力がなければ文章を送り、空欄なら次へ進む。もっと考えたいときは一時停止してね。リアルタイムのAIがあなたと対話し、質問するよ。", "名前や連絡先は書かないでね。質問を飛ばしたり、いつでも画面を閉じて中断したりできるよ。\n\n選んだ文化的背景、回答、回答時間、AIの解釈は、Yang Yeongjuの文化と欲望の研究のために保存する予定だよ。人類のかけがえのない宝石として、大切にしていくよ。\n\nお問い合わせ: transaction.artlab@gmail.com"], "fr": ["L’eau a besoin de récits variés.", "Comment sommes-nous en train de muter ?", "Partage tes pensées sincères. Après une minute sans saisie, ton texte est envoyé ; une réponse vide est passée. Fais une pause si tu as besoin de réfléchir davantage. Une IA dialoguera avec toi et te posera des questions en temps réel.", "Merci de ne pas écrire de noms ni de coordonnées. Tu peux passer une question ou fermer la fenêtre à tout moment.\n\nLe contexte culturel choisi, les réponses, les temps de réponse et les interprétations de l’IA seront conservés pour la recherche de Yang Yeongju sur la culture et le désir. Ils seront gardés comme de précieux joyaux de l’humanité.\n\nContact : transaction.artlab@gmail.com"]};
  const FOLLOWUP={ko:'이 이야기를 조금 더',en:'A little more about this',de:'Ein wenig mehr dazu',ja:'この話をもう少し',fr:'Encore un peu sur ce récit'};
  const AUDIO={ko:{enabled:'돌 소리 켜기',synthetic:'임시 합성 돌 소리',choose:'내 돌 소리 파일 선택',hint:'파일은 이 기기에서만 사용해요. 임의 구간을 0.5초·1초·2초로 재생합니다.',test:'소리 들어보기',loaded:'선택한 녹음 사용 중',error:'이 파일을 읽지 못했어요. WAV 또는 MP3로 다시 골라주세요.'},en:{enabled:'Stone sounds on',synthetic:'Temporary synthesized stone sound',choose:'Choose a stone recording',hint:'The file stays on this device. Random 0.5, 1 or 2 second excerpts will play.',test:'Listen',loaded:'Using your recording',error:'Could not read this file. Please try WAV or MP3.'},de:{enabled:'Steingeräusche einschalten',synthetic:'Vorläufiges synthetisches Steingeräusch',choose:'Steinaufnahme auswählen',hint:'Die Datei bleibt auf diesem Gerät. Zufällige Ausschnitte von 0,5, 1 oder 2 Sekunden werden abgespielt.',test:'Anhören',loaded:'Deine Aufnahme wird verwendet',error:'Datei nicht lesbar. Bitte WAV oder MP3 versuchen.'}};
  const I={
@@ -51,8 +52,8 @@
   let privacy=local?t.demoPrivacy:R.mode==='demo'?t.serverPrivacy:t.livePrivacy;
   if(!local)privacy+=` ${t.retention}: ${R.retentionDays} ${t.days}.`;
   if(R.contact)privacy+=` ${t.contact}: ${R.contact}`;
-  setText('privacyNote',privacy);setText('aboutContact',privacy);
-  setText('aboutTitle',t.aboutTitle);setText('aboutText',t.aboutText);setText('aboutTechnical',t.technical);
+  setText('privacyNote',privacy);
+  ['aboutTitle','aboutText','aboutTechnical','aboutContact'].forEach((id,i)=>setText(id,ABOUT_COPY[lang][i]));
   setText('answerLabel',t.answer);$('answer').placeholder=t.placeholder;
   setText('pauseButton',t.pause);setText('skipButton',t.skip);setText('sendButton',t.send);setText('inputHint',t.hint);
   setText('traceTitle',t.trace);setText('downloadButton',t.download);setText('restartButton',t.restart);setText('footerNote',t.footer);
@@ -117,7 +118,7 @@
  }
  async function transmit(){
   if(phase==='sending')return;
-  phase='sending';enableForm(false);$('retryBox').hidden=true;$('answerForm').setAttribute('aria-busy','true');$('typingIndicator').hidden=false;setText('statusMessage',T().sending);saveMeta();
+  phase='sending';enableForm(false);$('retryBox').hidden=true;$('answerForm').setAttribute('aria-busy','true');$('typingIndicator').hidden=false;$('questionStage').setAttribute('data-loading','true');$('questionStage').setAttribute('aria-busy','true');$('statusMessage').className='sr-only';setText('statusMessage',T().sending);saveMeta();
   try{
    const oldIdx=s.next_index,before=s.accepted_count,oldKind=s.question_kind||'main';
    const result=local?localTurn(pending):await api('/turn',pending);
@@ -133,7 +134,7 @@
   }catch{
    phase='error';setText('statusMessage','');setText('retryMessage',T().retry);$('retryBox').hidden=false;saveMeta();
   }finally{
-   $('answerForm').setAttribute('aria-busy','false');$('typingIndicator').hidden=true;
+   $('answerForm').setAttribute('aria-busy','false');$('typingIndicator').hidden=true;$('questionStage').setAttribute('data-loading','false');$('questionStage').setAttribute('aria-busy','false');if($('statusMessage').textContent===T().sending)setText('statusMessage','');$('statusMessage').className='status-message';
   }
  }
  function submit(trigger){

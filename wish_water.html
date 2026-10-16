@@ -3,7 +3,7 @@
 <head>
  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
  <meta name="theme-color" content="#000000"><meta name="description" content="Wish Water — a participatory web artwork by Yang Yeongju.">
- <title>Wish Water · Yang Yeongju</title><link rel="stylesheet" href="wish-water-assets/styles.css?v=20261016v5">
+ <title>Wish Water · Yang Yeongju</title><link rel="stylesheet" href="wish-water-assets/styles.css?v=20261016v6">
 <style>html#wish-water-page{--bg:#000!important;background:#000!important;color-scheme:dark;min-height:100%}html#wish-water-page body{background:#000!important;min-height:100vh;min-height:100dvh;margin:0}</style>
 </head>
 <body>
@@ -38,19 +38,22 @@
   </section>
   <section id="talk" class="conversation" hidden>
    <div class="talk-meta"><span id="questionStep">01 / 09</span><div id="progressDots" class="progress-dots" aria-label="대화 진행"></div><span id="questionKind" class="question-kind" hidden></span><span id="contextLabel"></span></div>
+   <div id="questionStage" class="question-stage" aria-busy="false">
    <p id="reply" class="reply" aria-live="polite"></p>
    <h1 id="question" class="question" tabindex="-1" aria-live="polite"></h1>
+   <div id="typingIndicator" class="question-loading" hidden aria-hidden="true"><span></span><span></span><span></span></div>
+   </div>
    <form id="answerForm"><label class="sr-only" id="answerLabel" for="answer">너의 이야기</label><div class="input-wrap"><span class="prompt-symbol" aria-hidden="true">›</span><textarea id="answer" maxlength="3000" rows="3" spellcheck="false" placeholder="여기에 너의 이야기를 남겨줘…"></textarea><span id="charCount" class="char-count">0 / 3000</span></div>
     <div class="time-row"><span id="timerNumber">60s</span><div class="water-timer" role="progressbar" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" aria-label="답변 시간"><div id="waterFill"></div></div><button type="button" id="pauseButton" class="text-button">Ⅱ 잠시 멈춤</button></div>
     <div class="form-footer"><button id="skipButton" type="button" class="text-button muted">이 돌은 남겨두기</button><span id="inputHint" class="input-hint">Enter 전송 · Shift+Enter 줄바꿈</span><button id="sendButton" class="primary small" type="submit">보내기 ↗</button></div>
    </form>
-   <div class="thinking-row"><p id="statusMessage" class="status-message" role="status"></p><span id="typingIndicator" class="typing-indicator" hidden aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></div>
+   <p id="statusMessage" class="status-message" role="status"></p>
    <div id="retryBox" class="retry-box" hidden><p id="retryMessage"></p><button id="retryButton" class="primary small">다시 연결하기</button></div>
   </section>
   <section id="ending" class="conversation ending" hidden><div class="eyebrow" id="endEyebrow">THE WATER REMEMBERS</div><h1 id="endTitle">너의 소원이<br><em>흐르기 시작했어.</em></h1><p id="wishEcho" class="wish-echo"></p><p id="endDescription" class="intro-description"></p><button id="wishAgain" class="primary" hidden>소원을 다시 놓기 ↗</button><details id="traceDetails"><summary id="traceTitle">남겨진 마음의 흔적</summary><div id="scoreBars"></div><p id="scoreDisclaimer" class="subtle"></p></details><div class="end-actions"><button id="downloadButton" class="text-button">내 기록 내려받기</button><button id="restartButton" class="text-button">새로운 물길</button></div><p id="sessionReceipt" class="subtle"></p></section>
  </main>
  <footer><span>WISH WATER <i>by</i> YANG YEONGJU</span><span id="footerNote">각자의 이야기가 만나는 물길.</span></footer>
- <dialog id="aboutDialog"><button id="closeAbout" class="close-button" aria-label="Close">×</button><div class="eyebrow">ABOUT THIS WORK</div><h2 id="aboutTitle">물은 이야기를 기억해.</h2><p id="aboutText"></p><p id="aboutTechnical" class="subtle"></p><p id="aboutContact" class="subtle"></p><div class="sound-settings"><label><input id="soundEnabled" type="checkbox" checked> <span id="soundLabel">돌 소리 켜기</span></label><p id="soundStatus" class="subtle">임시 합성 돌 소리</p><label class="audio-file-label" for="stoneAudioFile" id="audioFileLabel">내 돌 소리 파일 선택</label><input id="stoneAudioFile" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac"><p id="audioHint" class="subtle">파일은 이 기기에서만 사용해요. 임의 구간을 0.5초·1초·2초로 재생합니다.</p><button id="testSound" type="button" class="text-button">소리 들어보기</button></div></dialog>
- <script src="wish-water-assets/runtime.js"></script><script src="wish-water-assets/js/data.js"></script><script src="wish-water-assets/js/core.js"></script><script src="wish-water-assets/js/landscape.js"></script><script src="wish-water-assets/js/sound.js?v=20261016v5"></script><script src="wish-water-assets/js/locales-extra.js?v=20261016v5"></script>
-<script src="wish-water-assets/js/app.js?v=20261016v5"></script>
+ <dialog id="aboutDialog"><button id="closeAbout" class="close-button" aria-label="Close">×</button><div class="eyebrow">ABOUT THIS WORK</div><h2 id="aboutTitle">물 속 다양한 이야기가 필요해.</h2><p id="aboutText"></p><p id="aboutTechnical" class="subtle"></p><p id="aboutContact" class="subtle"></p><div class="sound-settings"><label><input id="soundEnabled" type="checkbox" checked> <span id="soundLabel">돌 소리 켜기</span></label><p id="soundStatus" class="subtle">임시 합성 돌 소리</p><label class="audio-file-label" for="stoneAudioFile" id="audioFileLabel">내 돌 소리 파일 선택</label><input id="stoneAudioFile" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac"><p id="audioHint" class="subtle">파일은 이 기기에서만 사용해요. 임의 구간을 0.5초·1초·2초로 재생합니다.</p><button id="testSound" type="button" class="text-button">소리 들어보기</button></div></dialog>
+ <script src="wish-water-assets/runtime.js"></script><script src="wish-water-assets/js/data.js"></script><script src="wish-water-assets/js/core.js"></script><script src="wish-water-assets/js/landscape.js"></script><script src="wish-water-assets/js/sound.js?v=20261016v6"></script><script src="wish-water-assets/js/locales-extra.js?v=20261016v6"></script>
+<script src="wish-water-assets/js/app.js?v=20261016v6"></script>
 </body></html>
