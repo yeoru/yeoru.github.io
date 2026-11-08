@@ -1,0 +1,4 @@
+#introEyebrow,#countryHint,#inputHint{display:none!important}
+#introTitle{white-space:nowrap;font-size:clamp(18px,4.8vw,42px);letter-spacing:-.055em;line-height:1.4}#introTitle br{display:none}
+.privacy-details{margin:14px 0 22px;font-size:12px;color:#adb9ae}.privacy-details summary{cursor:pointer;list-style:none;display:flex;gap:12px;align-items:center}.privacy-details summary::-webkit-details-marker{display:none}.privacy-details summary span{transition:transform .2s}.privacy-details[open] summary span{transform:rotate(180deg)}.privacy-details summary:focus-visible{outline:1px solid #fff;outline-offset:5px}
+#scoreBars{margin-top:20px}.score-row{display:grid;grid-template-columns:80px minmax(0,1fr)55px;gap:12px;align-items:center;margin:10px 0}.score-row.dominant{color:#fff}.score-row.dominant .score-value{background:#d1efba}#landscape{image-rendering:auto}

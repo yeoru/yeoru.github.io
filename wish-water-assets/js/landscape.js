@@ -7,7 +7,7 @@
   constructor(canvas){
    this.canvas=canvas;this.ctx=canvas.getContext('2d');this.ctx.imageSmoothingEnabled=false;
    this.reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;this.removed=new Map();this.releaseAt=null;this.releasePlan=[];this.releaseWaterDelay=0;this.releaseDuration=2800;this.lastTime=null;this.flow=0;this.waterTravel=0;this.flowStartedAt=null;
-   this.imageCache=new Map();this.fish=null;this.oldFish=null;this.fishX=208;this.changeAt=0;this.school=Array.from({length:9},(_,i)=>({x:24+i*30,phase:i*2.399,scale:.48+(i%4)*.16,speed:.72+(i%5)*.12}));
+   this.words=[];this.imageCache=new Map();this.fish=null;this.oldFish=null;this.fishX=208;this.changeAt=0;this.school=Array.from({length:9},(_,i)=>({x:24+i*30,phase:i*2.399,scale:.48+(i%4)*.16,speed:.72+(i%5)*.12}));
    let seed=79;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
    this.stars=Array.from({length:105},()=>({x:rand()*720,y:12+rand()*159,s:rand()>.94?2:1,p:rand()*6.28}));
    this.pebbles=Array.from({length:100},()=>({x:rand()*720,y:259+rand()*33,s:1+Math.floor(rand()*3),c:rand()}));
@@ -60,26 +60,40 @@
    const start=this.removed.get(index);let progress=0;
    if(start!==undefined)progress=this.reduced?1:clamp((time-start)/1400);else if(this.releaseAt!==null)progress=this.reduced?1:clamp((time-this.releaseAt-(this.releasePlan.find(r=>r.id===index)?.delay||0))/1400);
    if(progress>=1)return;const {x,w,h}=r,y=r.y-progress*progress*(start!==undefined?64:123),g=this.ctx;g.save();g.globalAlpha=1-smooth((progress-.4)/.6);g.translate(Math.round(x),Math.round(y));
-   g.fillStyle=['#727668','#838877','#606c60'][index%3];g.beginPath();g.moveTo(8,0);g.lineTo(w-10,0);g.lineTo(w-10,3);g.lineTo(w-3,3);g.lineTo(w-3,7);g.lineTo(w,7);g.lineTo(w,h-7);g.lineTo(w-7,h-7);g.lineTo(w-7,h-2);g.lineTo(6,h-2);g.lineTo(6,h-5);g.lineTo(0,h-5);g.lineTo(0,6);g.lineTo(8,6);g.closePath();g.fill();
+   g.fillStyle=progress>0?`hsl(${(index*39+progress*540)%360} 78% 62%)`:['#727668','#838877','#606c60'][index%3];g.beginPath();g.moveTo(8,0);g.lineTo(w-10,0);g.lineTo(w-10,3);g.lineTo(w-3,3);g.lineTo(w-3,7);g.lineTo(w,7);g.lineTo(w,h-7);g.lineTo(w-7,h-7);g.lineTo(w-7,h-2);g.lineTo(6,h-2);g.lineTo(6,h-5);g.lineTo(0,h-5);g.lineTo(0,6);g.lineTo(8,6);g.closePath();g.fill();
    g.fillStyle='#a7ad8a';g.fillRect(9,2,w-21,2);g.fillStyle='#344235';g.fillRect(7,h-6,w-18,3);
-   for(let j=0;j<11;j++){g.fillStyle=j%3?'#4e5c48':'#95a37b';g.fillRect(5+(j*13+index*7)%(w-11),6+(j*7)%(h-11),2+j%3,1);}g.restore();
+   for(let j=0;j<11;j++){g.fillStyle=progress>0?`hsl(${(index*39+j*32+progress*540)%360} 85% 75%)`:(j%3?'#4e5c48':'#95a37b');g.fillRect(5+(j*13+index*7)%(w-11),6+(j*7)%(h-11),2+j%3,1);}g.restore();
    if(progress>0&&!this.reduced)for(let j=0;j<26;j++){
     const age=progress*1.4-(j%3)*.075;if(age<0)continue;
     const vx=Math.sin(j*7.37+index)*54,vy=-22-(j%7)*7;
     const px=x+w/2+Math.sin(j*2.1)*w*.4+vx*age,py=r.y+h*.58+vy*age+74*age*age;
-    this.rect(px,py,j%5===0?3:1+j%2,j%5===0?2:1,['#b4ba93','#7b8970','#d2cba1','#4a6048'][j%4],clamp(1-age/1.15)*.85);
+    this.rect(px,py,j%5===0?3:1+j%2,j%5===0?2:1,['#f4b3fa','#a5dfff','#f6dc9a','#a6f4c9'][j%4],clamp(1-age/1.15)*.85);
    }
   }
   drawFish(q,t,time,dt){
-   if(!this.fish)return;const canPass=q>.10,fade=this.reduced?1:clamp((time-this.changeAt)/850),g=this.ctx;
+   if(!this.fish)return;const canPass=q>.10,fade=this.reduced?1:clamp((time-this.changeAt)/1600),g=this.ctx;
    for(const body of this.school){
     if(!this.reduced){body.x+=dt*(canPass?15+q*58:3.5)*body.speed;if(!canPass&&body.x>286)body.x=-25;if(body.x>762)body.x=-30;}
     const x=body.x,y=this.surface(x,q,t)+2+Math.sin(t*1.05+body.phase)*3.3+(body.scale<.65?8:0),slope=(this.surface(x+7,q,t)-this.surface(x-7,q,t))/14;
     const angle=clamp(Math.atan(slope)*.65,-.22,.40)+(this.reduced?0:Math.sin(t*.8+body.phase)*.07),edge=canPass?clamp((x+22)/38)*clamp((756-x)/35):clamp((x+22)/38)*clamp((306-x)/30);
-    const render=(fish,alpha)=>{if(!fish?.image||alpha<=0)return;const b=fish.bounds||[0,0,fish.image.width,fish.image.height],width=53*body.scale,height=width*b[3]/b[2];g.save();g.globalAlpha=alpha*edge;g.translate(x,y);g.rotate(angle);g.imageSmoothingEnabled=true;g.drawImage(fish.image,...b,-width/2,-height*.80,width,height);g.restore();g.imageSmoothingEnabled=false;};
+    const render=(fish,alpha)=>{if(!fish?.image||alpha<=0)return;const b=fish.bounds||[0,0,fish.image.width,fish.image.height],width=53*body.scale,height=width*b[3]/b[2];g.save();g.globalAlpha=alpha*edge;g.translate(x,y);g.rotate(angle);const pulse=this.reduced?0:Math.sin(Math.PI*fade)*.13;g.scale(1+pulse,1-pulse);g.imageSmoothingEnabled=true;g.drawImage(fish.image,...b,-width/2,-height*.80,width,height);g.restore();g.imageSmoothingEnabled=false;};
     if(this.oldFish&&fade<1)render(this.oldFish,1-fade);render(this.fish,fade);
     if(x>0){this.rect(x-23*body.scale,y+5,10*body.scale,1,'#8db9a6',.20*edge);if(canPass)this.rect(x-31*body.scale,y+7,7*body.scale,1,'#5d9e87',.15*edge);}
    }
+  }
+  addWords(text,keywords=[]){
+   this.oldFish=this.fish;this.changeAt=performance.now();
+   // Only literal words from the submitted answer; no invented AI phrases.
+   const safe=text.replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g,' ').replace(/https?:\/\/\S+/g,' ').replace(/\d[\d ()-]{7,}\d/g,' ');
+   const stop=new Set(['나는','내가','그냥','정말','너무','그리고','하지만','있어요','싶어요','the','and','that','with','this']);
+   const candidates=[...new Set((safe.match(/[\p{L}\p{M}]{2,18}/gu)||[]).filter(w=>!stop.has(w.toLowerCase())))];
+   const ranked=candidates.map((w,i)=>({w,i,score:(keywords.some(k=>k.includes(w)||w.includes(k))?100:0)+Math.min(w.length,7)})).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,2);
+   for(const {w} of ranked)this.words.push({text:w,x:30+Math.random()*210,phase:Math.random()*6.28});
+   this.words=this.words.slice(-12);
+  }
+  drawWords(q,t,dt){
+   const g=this.ctx;g.save();g.font='15px sans-serif';g.textAlign='center';g.textBaseline='bottom';g.fillStyle='#fff';g.shadowColor='#000';g.shadowBlur=3;
+   this.words.forEach((word,i)=>{const end=q>.1?690:290;if(!this.reduced){word.x+=dt*(3+q*17);if(word.x>end)word.x=24;}const y=this.surface(word.x,q,t)-8-(i%3)*16+(this.reduced?0:Math.sin(t*.85+word.phase)*3);g.fillText(word.text,word.x,y,105);});g.restore();
   }
   tick(time){if(!document.hidden)this.draw(time);else this.lastTime=time;requestAnimationFrame(this.tick);}
   draw(time){
@@ -88,7 +102,7 @@
    for(const s of this.stars){const a=.13+.5*(.5+.5*Math.sin(t*.7+s.p));this.rect(s.x,s.y,s.s,s.s,'#e0ece0',a);if(s.s===2){this.rect(s.x-2,s.y,5,1,'#d2efa2',a*.45);this.rect(s.x,s.y-2,1,5,'#d2efa2',a*.45);}}
    for(let x=0;x<720;x+=5){const y=this.bed(x);this.rect(x,y,5,300-y,'#0c140f');this.rect(x,y,5,1,'#1e2c1b');}
    for(const p of this.pebbles)this.rect(p.x,p.y,p.s+1,p.s,p.c>.78?'#48543b':'#25331f',.65);
-   this.drawWater(q,t,time);this.drawFish(q,t,time,dt);for(let i=8;i>=0;i--)this.rock(this.rocks[i],i,time);
+   this.drawWater(q,t,time);this.drawFish(q,t,time,dt);this.drawWords(q,t,dt);for(let i=8;i>=0;i--)this.rock(this.rocks[i],i,time);
    if(q>.8)for(let j=0;j<15;j++){const x=432+(j*67)%260,y=208+(j*19)%32,a=(.5+.5*Math.sin(t*1.4+j))*(q-.8)*3;this.rect(x,y,1,3,'#caef94',a);this.rect(x-1,y+1,3,1,'#caef94',a);}
   }
  }
