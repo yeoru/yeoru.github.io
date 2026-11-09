@@ -56,5 +56,61 @@
 </footer>
 <script src="assets/js/ink.js" defer></script>
 <script src="assets/js/site.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  // 같은 홈페이지의 HTML 링크에서 확장자를 제거합니다.
+  function cleanPath(path) {
+    return path
+      .replace(/\/index\.html$/i, "/")
+      .replace(/\.html$/i, "");
+  }
+
+  function updateLinks() {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      var original = link.getAttribute("href");
+
+      if (!original || original.startsWith("#")) return;
+
+      try {
+        var url = new URL(original, window.location.href);
+
+        // 외부 사이트, 이메일 등의 링크는 건드리지 않습니다.
+        if (url.origin !== window.location.origin) return;
+
+        var path = cleanPath(url.pathname);
+
+        if (path !== url.pathname) {
+          link.setAttribute("href", path + url.search + url.hash);
+        }
+      } catch (error) {
+        // 주소가 아닌 링크는 그대로 둡니다.
+      }
+    });
+  }
+
+  // 기존 .html 주소로 들어온 경우에도 주소창을 정리합니다.
+  var current = new URL(window.location.href);
+  var clean = cleanPath(current.pathname);
+
+  if (clean !== current.pathname) {
+    window.history.replaceState(
+      window.history.state,
+      "",
+      clean + current.search + current.hash
+    );
+  }
+
+  updateLinks();
+
+  // 나중에 화면에 추가되는 링크에도 적용합니다.
+  var observer = new MutationObserver(updateLinks);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
 </body>
 </html>

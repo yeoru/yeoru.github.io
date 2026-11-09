@@ -56,4 +56,61 @@
  <dialog id="aboutDialog"><button id="closeAbout" class="close-button" aria-label="Close">×</button><div class="eyebrow">ABOUT THIS WORK</div><h2 id="aboutTitle">물 속 다양한 이야기가 필요해.</h2><p id="aboutText"></p><p id="aboutTechnical" class="subtle"></p><p id="aboutContact" class="subtle"></p><div class="sound-settings"><label><input id="soundEnabled" type="checkbox" checked> <span id="soundLabel">돌 소리 켜기</span></label><p id="soundStatus" class="subtle">임시 합성 돌 소리</p><label class="audio-file-label" for="stoneAudioFile" id="audioFileLabel">내 돌 소리 파일 선택</label><input id="stoneAudioFile" type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac"><p id="audioHint" class="subtle">파일은 이 기기에서만 사용해요. 임의 구간을 0.5초·1초·2초로 재생합니다.</p><button id="testSound" type="button" class="text-button">소리 들어보기</button></div></dialog>
  <script src="wish-water-assets/runtime.js"></script><script src="wish-water-assets/js/data.js?v=20261108v3"></script><script src="wish-water-assets/js/core.js"></script><script src="wish-water-assets/js/landscape.js?v=20261108v3"></script><script src="wish-water-assets/js/sound.js?v=20261016v6"></script><script src="wish-water-assets/js/locales-extra.js?v=20261016v6"></script>
 <script src="wish-water-assets/js/app.js?v=20261108v3"></script>
-<script src="js/nationality.js?v=20261108"></script></body></html>
+<script src="js/nationality.js?v=20261108"></script>
+<script>
+(function () {
+  "use strict";
+
+  // 같은 홈페이지의 HTML 링크에서 확장자를 제거합니다.
+  function cleanPath(path) {
+    return path
+      .replace(/\/index\.html$/i, "/")
+      .replace(/\.html$/i, "");
+  }
+
+  function updateLinks() {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      var original = link.getAttribute("href");
+
+      if (!original || original.startsWith("#")) return;
+
+      try {
+        var url = new URL(original, window.location.href);
+
+        // 외부 사이트, 이메일 등의 링크는 건드리지 않습니다.
+        if (url.origin !== window.location.origin) return;
+
+        var path = cleanPath(url.pathname);
+
+        if (path !== url.pathname) {
+          link.setAttribute("href", path + url.search + url.hash);
+        }
+      } catch (error) {
+        // 주소가 아닌 링크는 그대로 둡니다.
+      }
+    });
+  }
+
+  // 기존 .html 주소로 들어온 경우에도 주소창을 정리합니다.
+  var current = new URL(window.location.href);
+  var clean = cleanPath(current.pathname);
+
+  if (clean !== current.pathname) {
+    window.history.replaceState(
+      window.history.state,
+      "",
+      clean + current.search + current.hash
+    );
+  }
+
+  updateLinks();
+
+  // 나중에 화면에 추가되는 링크에도 적용합니다.
+  var observer = new MutationObserver(updateLinks);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+</body></html>
