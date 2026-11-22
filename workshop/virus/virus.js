@@ -31,6 +31,21 @@ if(form&&wish&&consent&&send){
  consent.addEventListener('change',()=>{hint.textContent=consent.checked?'✓ 동의 · ↵ 분석':'↵ 동의 · ↵↵ 분석';});
 }
 
+
+const elementKeys=['wood','fire','earth','metal','water'],elementNames=['목','화','토','금','수'];
+const elementColors=[['#668b70','#5b9294','#5f80a2'],['#b86c69','#c78e68','#d2bc83','#bb8196'],['#a58a60','#c1af77','#ded0a4'],['#8f98a2','#f1f1ed','#bfc5cc','#ffffff'],['#171b24','#222d49','#3c436c']];
+const elementPanel=el('section',null,'five-elements');elementPanel.hidden=true;result.append(elementPanel);
+document.addEventListener('workshop:result',e=>{
+ const v=e.detail?.result,p=v?.five_elements_percentages;elementPanel.replaceChildren();elementPanel.hidden=false;
+ if(!p||elementKeys.some(k=>!Number.isFinite(p[k]))){elementPanel.append(el('p','오행 분석을 불러오지 못했어요. 서버 업데이트 후 다시 입력해주세요.'));return;}
+ elementPanel.append(el('h3','목 · 화 · 토 · 금 · 수'));const row=el('div',null,'five-elements-row');
+ elementKeys.forEach((k,i)=>{const cell=el('div',null,'five-element'),orb=el('span',null,'element-orb');orb.style.background='radial-gradient(circle at 30% 25%, '+elementColors[i].join(', ')+')';cell.append(orb,el('span',elementNames[i]),el('span',p[k]+'%'));row.append(cell);});elementPanel.append(row,el('p',v.five_elements_reason||'','va-meta'),el('p','소원 문장의 오행적 해석 비중','va-meta'));
+ const total=elementKeys.reduce((a,k)=>a+p[k],0);if(!total){elementPanel.append(el('p','해석할 단서가 부족합니다.'));return;}
+ const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+ const colors=Array.from({length:5},(_,i)=>{let sum=[0,0,0];elementKeys.forEach((k,j)=>{const c=rgb(elementColors[j][i%elementColors[j].length]);sum=sum.map((x,n)=>x+c[n]*p[k]/total);});const a=rgb(/^#[0-9a-f]{6}$/i.test(v.colors?.[i]||'')?v.colors[i]:'#808080');return '#'+sum.map((x,n)=>Math.round(x*.65+a[n]*.35).toString(16).padStart(2,'0')).join('');});
+ if(typeof window.setFlowPalette==='function')window.setFlowPalette(colors);
+});
+
 const dialog=el('dialog',null,'va-dialog'),close=el('button','닫기 ×'),body=el('div');close.type='button';close.onclick=()=>dialog.close();dialog.append(close,body);document.body.append(dialog);
 function path(x){return /^\/workshop\/virus\/images\/[\w.-]+$/.test(x.local_image||'')?x.local_image:'';}
 function details(x){body.replaceChildren();body.append(el('h3',x.virus||x.scientific_name));const im=el('img');im.src=path(x);im.alt=x.virus;body.append(im,el('p',x.scientific_name));for(const [h,t] of [['생물학적 현상',x.science],['작가의 예술적 해석',x.interpretation]])if(t)body.append(el('h4',h),el('p',t));body.append(el('p','이미지는 작가가 제공한 시각 자료이며, 생물학적 현상과 욕망의 연결은 예술적 해석입니다.'));if(x.research_url){try{const u=new URL(x.research_url);if(u.protocol==='https:'){const a=el('a','연구 자료');a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';body.append(a);}}catch{}}dialog.showModal();}
@@ -45,5 +60,5 @@ if(v.result?.classification_mode==='tentative')content.append(el('p','입력의 
 select.onchange=()=>{limit=Number(select.value);if(last)render(last);};
 document.addEventListener('workshop:result',e=>render(e.detail));
 document.getElementById('wishForm')?.addEventListener('submit',()=>{revision++;last=null;content.replaceChildren();controls.hidden=true;status.hidden=false;status.textContent='소원을 분석하고 있어요…';});
-fetch('/workshop/virus/virus_atlas.json?v=5').then(r=>{if(!r.ok)throw Error();return r.json();}).then(v=>{data=v;if(last)render(last);}).catch(()=>{status.hidden=false;status.textContent='바이러스 목록을 불러오지 못했어요. 배포된 파일 경로를 확인해주세요.';});
+fetch('/workshop/virus/virus_atlas.json?v=6').then(r=>{if(!r.ok)throw Error();return r.json();}).then(v=>{data=v;if(last)render(last);}).catch(()=>{status.hidden=false;status.textContent='바이러스 목록을 불러오지 못했어요. 배포된 파일 경로를 확인해주세요.';});
 })();
