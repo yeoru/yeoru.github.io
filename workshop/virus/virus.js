@@ -22,10 +22,13 @@ if(blend&&painting){
 }
 const form=document.getElementById('wishForm'),wish=document.getElementById('wish'),consent=document.getElementById('consent'),send=document.getElementById('send');
 if(form&&wish&&consent&&send){
- const hint=el('p','Enter 한 번: 정보 저장·분석 동의 / 다시 Enter: 분석 시작','va-enter-hint');hint.id='virusEnterHint';form.append(hint);wish.setAttribute('aria-describedby',((wish.getAttribute('aria-describedby')||'')+' virusEnterHint').trim());
+ wish.setAttribute('autofocus','');
+ function initialFocus(){if(document.activeElement===document.body||document.activeElement===wish)wish.focus({preventScroll:true});}
+ if(document.readyState==='complete')requestAnimationFrame(initialFocus);else window.addEventListener('load',()=>requestAnimationFrame(initialFocus),{once:true});
+ const hint=el('p','↵ 동의 · ↵↵ 분석','va-enter-hint');hint.title='첫 Enter: 정보 저장·분석에 동의 / 두 번째 Enter: 분석 시작';hint.setAttribute('aria-live','polite');hint.id='virusEnterHint';form.append(hint);wish.setAttribute('aria-describedby',((wish.getAttribute('aria-describedby')||'')+' virusEnterHint').trim());
  let composing=false;wish.addEventListener('compositionstart',()=>composing=true);wish.addEventListener('compositionend',()=>composing=false);
- wish.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.isComposing||composing||e.keyCode===229)return;e.preventDefault();if(e.repeat||!wish.value.trim())return;if(!consent.checked){consent.checked=true;consent.dispatchEvent(new Event('change',{bubbles:true}));hint.textContent='저장·분석에 동의했습니다. Enter를 다시 누르면 분석합니다.';return;}if(!send.disabled)form.requestSubmit(send);});
- consent.addEventListener('change',()=>{hint.textContent=consent.checked?'Enter를 누르면 분석합니다.':'Enter 한 번: 정보 저장·분석 동의 / 다시 Enter: 분석 시작';});
+ wish.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.isComposing||composing||e.keyCode===229)return;e.preventDefault();if(e.repeat||!wish.value.trim())return;if(!consent.checked){consent.checked=true;consent.dispatchEvent(new Event('change',{bubbles:true}));hint.textContent='✓ 동의 · ↵ 분석';return;}if(!send.disabled)form.requestSubmit(send);});
+ consent.addEventListener('change',()=>{hint.textContent=consent.checked?'✓ 동의 · ↵ 분석':'↵ 동의 · ↵↵ 분석';});
 }
 
 const dialog=el('dialog',null,'va-dialog'),close=el('button','닫기 ×'),body=el('div');close.type='button';close.onclick=()=>dialog.close();dialog.append(close,body);document.body.append(dialog);
@@ -42,5 +45,5 @@ if(v.result?.classification_mode==='tentative')content.append(el('p','입력의 
 select.onchange=()=>{limit=Number(select.value);if(last)render(last);};
 document.addEventListener('workshop:result',e=>render(e.detail));
 document.getElementById('wishForm')?.addEventListener('submit',()=>{revision++;last=null;content.replaceChildren();controls.hidden=true;status.hidden=false;status.textContent='소원을 분석하고 있어요…';});
-fetch('/workshop/virus/virus_atlas.json?v=4').then(r=>{if(!r.ok)throw Error();return r.json();}).then(v=>{data=v;if(last)render(last);}).catch(()=>{status.hidden=false;status.textContent='바이러스 목록을 불러오지 못했어요. 배포된 파일 경로를 확인해주세요.';});
+fetch('/workshop/virus/virus_atlas.json?v=5').then(r=>{if(!r.ok)throw Error();return r.json();}).then(v=>{data=v;if(last)render(last);}).catch(()=>{status.hidden=false;status.textContent='바이러스 목록을 불러오지 못했어요. 배포된 파일 경로를 확인해주세요.';});
 })();
